@@ -17,6 +17,7 @@ namespace BL
         public void Add(Student student)
         {
             studentDAL.Add(student);
+            studentDAL.AddResult(student);
         }
 
         public string GetSubjects()

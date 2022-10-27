@@ -31,9 +31,10 @@ namespace DAL.DataAccessLayer
             dbconnection.CloseConnection();
         }
         public void AddResult(Student student)
-        {
+        { 
+            dbconnection.OpenConnection();
             SqlCommand sqlCommand;
-
+           
             var studentId = GetStudent(student.NID);
             if (studentId != null)
             {
@@ -46,6 +47,7 @@ namespace DAL.DataAccessLayer
                     }
                 }
             }
+            dbconnection.CloseConnection(); 
 
         }
         public string GetStudent(string studentId)

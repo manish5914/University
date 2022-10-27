@@ -50,9 +50,10 @@
     });
 
 }
+var numberofinput = 3;
 function fillList() {
 
-    var numberofinput = 3;
+    
     $.ajax({
         type: "POST",
         url: "/Student/GetSubjects",
@@ -61,12 +62,12 @@ function fillList() {
         success: function (data) {
 
             var jsonSubjects = JSON.parse(data);
-            console.log(jsonSubjects);
+            //console.log(jsonSubjects);
 
             $.each(jsonSubjects, function (key, value) {
-                for (let i = 0; i < numberofinput; i++) {
-                    $("#subject" + (i + 1)).append("<option value=" + value.SubjectId + ">" + value.SubjectName + "</option>");
-                }
+               
+                    $("#subject" + (currentSubject)).append("<option value=" + value.SubjectId + ">" + value.SubjectName + "</option>");
+               
                 //console.log(value);
             });
         }, error: function () {
@@ -79,12 +80,35 @@ function fillList() {
         data: "",
         success: function (data) {
             var jsonGrades = JSON.parse(data);
-            console.log(jsonGrades);
+            //console.log(jsonGrades);
             $.each(jsonGrades, function (key, value) {
-                for (let i = 0; i < numberofinput; i++) {
-                    $("#grade" + (i + 1)).append("<option value=" + value.Grade + ">" + value.Grade + "</option>")
-                }
+                
+                    $("#grade" + currentSubject).append("<option value=" + value.Grade + ">" + value.Grade + "</option>")
+                
             });
         }
     });
+
 }
+const maxSubjects = 3;
+const minSubjects = 1;
+let currentSubject = 0;
+function addSubject() {
+    if (currentSubject < maxSubjects) {
+        currentSubject++;
+        $("#test").append('<div id="resultsection'+currentSubject+'"> \n <select id = "subject' + currentSubject + '" class= "subject-input" ></select > \n <select id="grade' + currentSubject + '" class="grade-input"></select>\n</div>');
+        fillList();
+        console.log(currentSubject);
+    }
+   
+}
+function removeSubject() {
+    if (currentSubject > minSubjects) {
+        $("#resultsection" + currentSubject).remove();
+        currentSubject--;
+        console.log(currentSubject);
+    }
+    
+    
+}
+
