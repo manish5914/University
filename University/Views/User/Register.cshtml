@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="~/Content/register.css">
+        <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script>
+            function registerUser() {
+
+                var email = $("#email").val();
+                var password = $("#password").val();
+
+                console.log(email, password);
+                var user = {
+                    ID: 0,
+                    Email: email,
+                    Password: password
+                };
+                console.log(user);
+                $.ajax({
+                    type: "POST",
+                    url: "/User/RegisterUser/",
+                    data: user,
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.url) {
+
+                            window.location = data.url;
+                        }
+                        else {
+                            console.log(data.error);
+                        }
+                    }, error: function (data) {
+
+                        console.log("Error");
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="header">Register</div>
+        <form>
+            <div id="form">
+                <div id="email-login">
+                    <label id="emailform" class="formlabel" for="email" >Email</label>
+                    <input id="email" class="input" type="email" placeholder="Enter Email" required />
+                </div>
+                <div id="password-login">
+                    <label id="passwordform" class="formlabel" for="password" >Password</label>
+                    <input id="password" class="input" type="password" placeholder="Enter Password" required />
+                </div>
+                <div id="registersection"> <button id="submit-button" type="button" onclick="registerUser()">Register</button></div>
+               
+            </div>
+               
+        </form>
+        <div id="otherpage"><p>Already have an account ?</p><a href="/User/UserLogin">Login</a></div>
+    </body>
+</html> 

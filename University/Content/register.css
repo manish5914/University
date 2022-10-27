@@ -1,0 +1,161 @@
+﻿body {
+}
+
+
+
+#header {
+    text-align: center;
+    color: white;
+    font-size: 54px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 7%;
+    background-color: #3366ff;
+    margin: 0;
+}
+
+.section{
+    width: 80%;
+    padding: 5%;
+}
+
+#form{
+    width: 50%;
+    display: grid;
+    grid-template: auto auto auto;
+    margin:auto;
+    margin-top: 5%;
+}
+
+#email-login{
+    display: inline-grid; 
+    grid-row: 1;
+    margin: 2%;
+}
+#password-login{
+    display: inline-grid;
+    grid-row: 2;
+    margin: 2%;
+}
+#name{
+    display: inline-grid;
+    grid-column: 1;
+    grid-row:1;
+    
+}
+
+#details{
+    display: inline-grid;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#contactdetails{
+    display: inline-grid;
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#results{
+    display: inline-grid;
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#registerbutton {
+    display: inline-grid;
+    grid-column: 1/span 2;
+    width: 60%;
+    margin: auto;
+    margin-top: 20px;
+    min-height: 50px;
+    background-color: #3366ff;
+    color: white;
+    border-color: Background;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+
+.formlabel {
+    font-size: 16px;
+    width: 100%;
+    font-weight: 100;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    margin: 5px;
+
+}
+.sectionheader {
+    font-size: 22px;
+    width: 100%;
+    font-weight: bold;
+    color: #3366ff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 5px;
+    text-align: center;
+}
+
+.input{
+    min-height: 30px;
+    width: 90%;
+    margin-left: 1%;  
+}
+select{
+    font-size: 16px;
+    min-height: 40px;
+    margin-top: 10px;
+    text-align: center;
+}
+.subject-input{
+    width: 70%;
+}
+.grade-input{
+    width: 28%;
+}
+
+#loginform{
+    display: grid;
+    width: 60%;
+    margin: auto;
+}
+#email-login, #password-login{
+    width: 75%;
+    margin: auto;
+}
+#passwordform, #emailform{
+    font-size: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#email, #password{
+    
+}
+#registersection{
+    display: inline-grid;
+    grid-row: 3;
+    width: 50%;
+    margin: auto;
+}
+#submit-button {
+    min-height: 50px;
+    margin-top: 20px;
+    background-color: #3366ff;
+    color: white;
+    border-color: Background;
+    font-size: 20px;
+    border-radius: 50px;
+}
+
+#login-section {
+    display: inline-grid;
+    grid-row: 3;
+    width: 50%;
+    margin: auto;
+}
+
+#otherpage {
+    width: 100%;
+    margin: auto;
+    text-align:center;
+    font-size: 16px;
+    
+}
