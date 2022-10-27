@@ -37,16 +37,12 @@ namespace University.Controllers
         public ActionResult GetSubjects()
         {
             Debug.WriteLine("In Subject");
-            var jsonSubjects = commonBL.DataTableToJSONWithStringBuilder(studentBL.GetSubjects());
-
-
-            return Json(jsonSubjects);//, JsonRequestBehavior.AllowGet);
+            return Json(studentBL.GetSubjects());//, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult GetGrades()
         {
-            var jsonGrades = commonBL.DataTableToJSONWithStringBuilder(studentBL.GetGrades());
-            return (Json(jsonGrades));
+            return (Json(studentBL.GetGrades()));
         }
         [HttpPost]
         public ActionResult Register(Student student)

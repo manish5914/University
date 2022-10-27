@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.DataAccessLayer;
 using DAL.Models;
+using Newtonsoft.Json;
+
 
 namespace BL
 {
@@ -17,13 +19,13 @@ namespace BL
             studentDAL.Add(student);
         }
 
-        public DataTable GetSubjects()
+        public string GetSubjects()
         {
-            return studentDAL.GetSubjects();
+            return JsonConvert.SerializeObject(studentDAL.GetSubjects());
         }
-        public DataTable GetGrades()
+        public string GetGrades()
         {
-            return studentDAL.GetGrades();
+            return JsonConvert.SerializeObject(studentDAL.GetGrades());
         }
     }
 }
