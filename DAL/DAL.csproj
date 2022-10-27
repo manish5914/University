@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DataAccessLayer\DAL.cs" />
     <Compile Include="DataAccessLayer\DBConnection.cs" />
     <Compile Include="DataAccessLayer\Student\StudentDAL.cs" />
     <Compile Include="DataAccessLayer\User\UserDAL.cs" />
