@@ -8,25 +8,27 @@ using DAL.DataAccessLayer;
 using DAL.Models;
 using Newtonsoft.Json;
 
-
 namespace BL
 {
-    public class StudentBL
+    public class StudentBL : IStudentBL
     {
-        StudentDAL studentDAL = new StudentDAL();
+        IStudentDAL _studentDAL;
+        public StudentBL()
+        {
+            _studentDAL = new StudentDAL();
+        }
         public void Add(Student student)
         {
-            studentDAL.Add(student);
-            studentDAL.AddResult(student);
+            _studentDAL.Add(student);
+            _studentDAL.AddResult(student);
         }
-
         public string GetSubjects()
         {
-            return JsonConvert.SerializeObject(studentDAL.GetSubjects());
+            return JsonConvert.SerializeObject(_studentDAL.GetSubjects());
         }
         public string GetGrades()
         {
-            return JsonConvert.SerializeObject(studentDAL.GetGrades());
+            return JsonConvert.SerializeObject(_studentDAL.GetGrades());
         }
     }
 }

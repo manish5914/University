@@ -8,7 +8,7 @@ using DAL.Models;
 
 namespace DAL.DataAccessLayer
 {
-    public class UserDAL
+    public class UserDAL: IUserDAL
     {
         DBConnection dbconnection;
         public UserDAL()

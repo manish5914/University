@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class UserBL
+    public class UserBL : IUserBL
     {
         UserDAL userDAL = new UserDAL();
-   
+        
+        public UserBL()
+        {
+
+        }
         public List<User> GetUsers()
         {
             return userDAL.GetUsers();

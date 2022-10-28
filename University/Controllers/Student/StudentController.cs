@@ -13,22 +13,17 @@ using System.Diagnostics;
 using Microsoft.Ajax.Utilities;
 using System.Web.Helpers;
 using BL;
-
 using System.Text.Json;
-
 
 namespace University.Controllers
 {
     public class StudentController : Controller
-    {
-        CommonBL commonBL = new CommonBL();
+    {  
         StudentBL studentBL = new StudentBL();
-        // GET: Student
         public ActionResult Index()
         {
             return View();
         }
-
         public ActionResult RegisterStudent()
         {
             return View();
@@ -37,7 +32,7 @@ namespace University.Controllers
         public ActionResult GetSubjects()
         {
             Debug.WriteLine("In Subject");
-            return Json(studentBL.GetSubjects());//, JsonRequestBehavior.AllowGet);
+            return Json(studentBL.GetSubjects());
         }
         [HttpPost]
         public ActionResult GetGrades()
@@ -56,8 +51,6 @@ namespace University.Controllers
             {
                 return Json(new { error = "Student not registered" });
             }
-
         }
-
     }
 }

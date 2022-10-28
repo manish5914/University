@@ -46,7 +46,9 @@
     <Compile Include="Class1.cs" />
     <Compile Include="DataAccessLayer\DAL.cs" />
     <Compile Include="DataAccessLayer\DBConnection.cs" />
+    <Compile Include="DataAccessLayer\Student\IStudentDAL.cs" />
     <Compile Include="DataAccessLayer\Student\StudentDAL.cs" />
+    <Compile Include="DataAccessLayer\User\IUserDAL.cs" />
     <Compile Include="DataAccessLayer\User\UserDAL.cs" />
     <Compile Include="Models\Grades.cs" />
     <Compile Include="Models\Student.cs" />

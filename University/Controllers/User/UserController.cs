@@ -14,7 +14,6 @@ namespace University.Controllers
     public class UserController : Controller
     {
         UserBL userBL = new UserBL();
-        // GET: User
         public ActionResult Index()
         {
             return View();
