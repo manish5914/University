@@ -1,6 +1,6 @@
-﻿using DAL.Models;
+﻿using DataAccessLayer.Models;
 
-namespace BL
+namespace BusinessLayer
 {
     public interface IStudentBL
     {

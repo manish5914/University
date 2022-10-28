@@ -1,4 +1,4 @@
-﻿namespace DAL.DataAccessLayer
+﻿namespace DataAccessLayer
 {
     public interface IUserDAL
     {

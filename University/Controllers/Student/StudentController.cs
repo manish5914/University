@@ -4,15 +4,15 @@ using System.Data.Common;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL.Models;
-using DAL.DataAccessLayer;
+using DataAccessLayer.Models;
+using DataAccessLayer;
 using System.Data;
 using System.Text;
 using System.Data.Odbc;
 using System.Diagnostics;
 using Microsoft.Ajax.Utilities;
 using System.Web.Helpers;
-using BL;
+using BusinessLayer;
 using System.Text.Json;
 
 namespace University.Controllers

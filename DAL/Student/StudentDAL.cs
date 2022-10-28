@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
-using DAL.Models;
+using DataAccessLayer.Models;
 using System.Diagnostics;
 
-namespace DAL.DataAccessLayer
+namespace DataAccessLayer
 {
     public class StudentDAL : IStudentDAL
     {

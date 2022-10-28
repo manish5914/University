@@ -5,7 +5,7 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Web;
 
-namespace DAL.Models
+namespace DataAccessLayer.Models
 {
     public class Student
     {

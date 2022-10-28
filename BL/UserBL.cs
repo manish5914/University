@@ -1,5 +1,5 @@
-﻿using DAL.DataAccessLayer;
-using DAL.Models;
+﻿using DataAccessLayer;
+using DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace BL
+namespace BusinessLayer
 {
     public class UserBL : IUserBL
     {

@@ -4,9 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.Models;
+using DataAccessLayer.Models;
 
-namespace DAL.DataAccessLayer
+namespace DataAccessLayer
 {
     public interface IStudentDAL
     {

@@ -5,9 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DAL.DataAccessLayer;
-using DAL.Models;
-using BL;
+using DataAccessLayer;
+using DataAccessLayer.Models;
+using BusinessLayer;
 
 namespace University.Controllers
 {

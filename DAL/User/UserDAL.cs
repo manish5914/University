@@ -4,9 +4,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
-using DAL.Models;
+using DataAccessLayer.Models;
 
-namespace DAL.DataAccessLayer
+namespace DataAccessLayer
 {
     public class UserDAL: IUserDAL
     {

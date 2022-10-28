@@ -4,11 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL.DataAccessLayer;
-using DAL.Models;
+using DataAccessLayer;
+using DataAccessLayer.Models;
 using Newtonsoft.Json;
 
-namespace BL
+namespace BusinessLayer
 {
     public class StudentBL : IStudentBL
     {

@@ -216,13 +216,13 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BL\BL.csproj">
+    <ProjectReference Include="..\BL\BusinessLayer.csproj">
       <Project>{5b04c3d2-7208-4b31-85ce-620d01e0f9c5}</Project>
-      <Name>BL</Name>
+      <Name>BusinessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
+    <ProjectReference Include="..\DAL\DataAccessLayer.csproj">
       <Project>{f4744af1-8d06-46e3-8da2-1aefbb8e7826}</Project>
-      <Name>DAL</Name>
+      <Name>DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
