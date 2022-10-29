@@ -7,8 +7,8 @@
     <ProjectGuid>{5B04C3D2-7208-4B31-85CE-620D01E0F9C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BL</RootNamespace>
-    <AssemblyName>BL</AssemblyName>
+    <RootNamespace>BusinessLayer</RootNamespace>
+    <AssemblyName>BusinessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -60,6 +60,9 @@
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>6.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="Unity.Mvc5">
+      <Version>1.4.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

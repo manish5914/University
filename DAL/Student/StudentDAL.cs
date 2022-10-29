@@ -17,7 +17,7 @@ namespace DataAccessLayer
             dbconnection = new DBConnection();
         }
         public void Add(Student student)
-        {
+        { 
             dbconnection.OpenConnection();
             SqlCommand sqlCommand = new SqlCommand($"insert into Students(NID, FirstName, LastName, Email, PhoneNumber, GuardianName, DateOfBirth) " +
                 $"values('{student.NID}', '{student.FirstName}', '{student.LastName}','{student.Email}','{student.PhoneNumber}','{student.GuardianName}','{student.DateOfBirth}'); ", dbconnection.connection);           

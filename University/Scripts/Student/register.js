@@ -96,7 +96,18 @@ let currentSubject = 0;
 function addSubject() {
     if (currentSubject < maxSubjects) {
         currentSubject++;
-        $("#test").append('<div id="resultsection'+currentSubject+'"> \n <select id = "subject' + currentSubject + '" class= "subject-input" ></select > \n <select id="grade' + currentSubject + '" class="grade-input"></select>\n</div>');
+
+        let main = document.createElement("div");
+        main.id = "resultsection" + currentSubject;
+        let subjectselect = document.createElement("select");
+        subjectselect.id = "subject" + currentSubject;
+        subjectselect.className = "subject-input";
+        let gradeselect = document.createElement("select");
+        gradeselect.id = "grade" + currentSubject;
+        gradeselect.className = "grade-input";
+        main.append(subjectselect);
+        main.append(gradeselect);
+        $("#resultsinput").append(main);
         fillList();
         console.log(currentSubject);
     }
@@ -107,8 +118,6 @@ function removeSubject() {
         $("#resultsection" + currentSubject).remove();
         currentSubject--;
         console.log(currentSubject);
-    }
-    
-    
+    }   
 }
 
