@@ -25,5 +25,9 @@ namespace BusinessLayer
         {
             return userDAL.Add(user);
         }
+        public User Login(User user)
+        {
+            return GetUsers().Where(u => user.Email == u.Email && user.Password == u.Password).FirstOrDefault();
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace University.Controllers
         {
             return View();
         }
-        public ActionResult RegisterStudent()
+        public ActionResult Register()
         {
             return View();
         }

@@ -24,15 +24,14 @@ namespace University.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CheckUser(User user)
+        public ActionResult Login(User user)
         {
-            Debug.WriteLine("Check User");
-            var searchUser = userBL.GetUsers().Where(u => user.Email == u.Email && user.Password == u.Password).FirstOrDefault();
-            if (searchUser != null)
+            Debug.WriteLine("Login");
+            User registeredUser = userBL.Login(user);
+            if (registeredUser != null)
             {
-                Session["CurrentUser"] = searchUser.Email;
+                Session["CurrentUser"] = registeredUser.Email;
                 return Json(new { url = Url.Action("Welcome") });
-               
             }
             else
             {
@@ -43,15 +42,10 @@ namespace University.Controllers
         public ActionResult Welcome()
         {
             return View();
-            //var currentUser = Session["CurrentUser"];
-            //if (currentUser != null)
-            //{
-            //    return View();
-            //}
-            //else
-            //{
-            //    return View();
-            //}
+        }
+        public JsonResult GetCurrentUser()
+        {
+            return Json(new {currentUser = Session["CurrentUser"] }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Register()
         {
