@@ -1,4 +1,24 @@
 ﻿function registerStudent() {
+    var studentDetails = getValues();
+    $.ajax({
+        type: "POST",
+        url: "/Student/Register",
+        data: studentDetails,
+        success: function (data) {
+            if (data.url) {
+                console.log("added student");
+                window.location = data.url;
+            }
+            if (data.error) {
+                alert(data.error);
+            }
+        },
+        error: function () {
+            console.log("What broke ?, Your soul did");
+        }
+    });
+}
+function getValues() {
     var fname = $("#firstname").val();
     var lname = $("#lastname").val();
     var nid = $("#nid").val();
@@ -23,23 +43,7 @@
         Subjects: subjects,
         Grades: grades
     };
-    $.ajax({
-        type: "POST",
-        url: "/Student/Register",
-        data: student,
-        success: function (data) {
-            if (data.url) {
-                console.log("added student");
-                window.location = data.url;
-            }
-            if (data.error) {
-                alert(data.error);
-            }
-        },
-        error: function () {
-            console.log("What broke ?, Your soul did");
-        }
-    });
+    return student;
 }
 var numberofinput = 3;
 function fillList() {
@@ -82,6 +86,7 @@ function addSubject() {
         currentSubject++;
         let main = document.createElement("div");
         main.id = "resultsection" + currentSubject;
+        main.className = "resultsection"
 
         let subjectselect = document.createElement("select");
         subjectselect.id = "subject" + currentSubject;

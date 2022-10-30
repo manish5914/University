@@ -1,8 +1,5 @@
 ﻿body {
 }
-
-
-
 #header {
     text-align: center;
     color: white;
@@ -13,57 +10,71 @@
     margin: 0;
 }
 
-.section{
-    width: 80%;
-    padding: 5%;
+.section {
+    /*    width: 80%;
+    padding: 5%;*/
+    flex: 50%;
+    display:flex;
+    flex-direction: column;
 }
-
 #form{
-    width: 50%;
-    display: grid;
-    grid-template: auto auto auto;
+    width: 80%;
     margin:auto;
     margin-top: 5%;
-}
 
-#email-login{
-    display: inline-grid; 
-    grid-row: 1;
-    margin: 2%;
-}
-#password-login{
-    display: inline-grid;
-    grid-row: 2;
-    margin: 2%;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 #name{
-    display: inline-grid;
-    grid-column: 1;
-    grid-row:1;
+    order: 1;
     
 }
 
-#details{
-    display: inline-grid;
-    grid-column: 2;
-    grid-row: 1;
+#details {
+    order: 2;
+
 }
 
-#contactdetails{
-    display: inline-grid;
-    grid-column: 1;
-    grid-row: 2;
+#contactdetails {
+    order: 3;
+
 }
 
-#results{
-    display: inline-grid;
-    grid-column: 2;
-    grid-row: 2;
+#results {
+    order: 4;
+
+}
+#resultsinput{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+
+}
+#submit-section {
+    order: 5;
+    flex: 100%;
+    display: flex;
 }
 
-#registerbutton {
-    display: inline-grid;
-    grid-column: 1/span 2;
+.input {
+    min-height: 30px;
+/*    width: 90%;*/
+    margin-left: 1%;
+    align-self: center;
+}
+.resultsection{
+    display: flex;
+    flex: 100%;
+}
+.subject-input {
+    flex: 70%;
+}
+
+.grade-input {
+   flex: 30%;
+}
+ #registerbutton {
     width: 60%;
     margin: auto;
     margin-top: 20px;
@@ -75,7 +86,17 @@
     border-radius: 50px;
 }
 
+#email-login {
+    display: inline-grid;
+    grid-row: 1;
+    margin: 2%;
+}
 
+#password-login {
+    display: inline-grid;
+    grid-row: 2;
+    margin: 2%;
+}
 .formlabel {
     font-size: 16px;
     width: 100%;
@@ -95,11 +116,6 @@
     text-align: center;
 }
 
-.input{
-    min-height: 30px;
-    width: 90%;
-    margin-left: 1%;  
-}
 /*input:invalid{
     border: 2px solid red;
 }
@@ -112,12 +128,7 @@ select{
     margin-top: 10px;
     text-align: center;
 }
-.subject-input{
-    width: 70%;
-}
-.grade-input{
-    width: 28%;
-}
+
 
 #loginform{
     display: grid;
@@ -164,4 +175,12 @@ select{
     text-align:center;
     font-size: 16px;
     
+}
+@media (max-width: 600px) {
+    body {
+        background-color: gray;
+    }
+    .section {
+        flex: 100%;
+    }
 }
