@@ -29,5 +29,12 @@ namespace BusinessLayer
         {
             return GetUsers().Where(u => user.Email == u.Email && user.Password == u.Password).FirstOrDefault();
         }
+        private string EncryptPassword(string password)
+        {
+            byte[] encode = new byte[password.Length];
+            encode = Encoding.UTF8.GetBytes(password);
+            return (Convert.ToBase64String(encode));
+
+        }
     }
 }

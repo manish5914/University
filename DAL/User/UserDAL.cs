@@ -27,7 +27,7 @@ namespace DataAccessLayer
         public List<User> GetUsers()
         {
             List<User> users = new List<User>();
-            SqlCommand sqlCommand = new SqlCommand($"select * from Users", dbconnection.connection);
+            SqlCommand sqlCommand = new SqlCommand($"select UserId, Email, Password from Users", dbconnection.connection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
             dbconnection.OpenConnection();
             DataTable dataTable = new DataTable();
@@ -48,7 +48,7 @@ namespace DataAccessLayer
         public List<User> GetUserByEmail(User user)
         {
             List<User> users = new List<User>();
-            SqlCommand sqlCommand = new SqlCommand($"select * from Users where Email = '{user.Email}'");
+            SqlCommand sqlCommand = new SqlCommand($"select UserId, Password from Users where Email = '{user.Email}'");
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
 
             DataTable dataTable = new DataTable();

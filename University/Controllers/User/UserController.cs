@@ -18,7 +18,7 @@ namespace University.Controllers
         {
             return View();
         }
-        public ActionResult UserLogin()
+        public ActionResult Login()
         {
             Debug.WriteLine("UserLogin");
             return View();

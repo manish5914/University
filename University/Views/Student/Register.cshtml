@@ -13,35 +13,47 @@
                 <div id="form" onsubmit="validate()">
                     <div id="name" class="section">
                         <div class="sectionheader">Name</div>
-                        <div>
+                        <div class="inputsection">
                             <label id="firstnamelabel" class="formlabel" for="firstname">Name</label>
                             <input id="firstname" class="input" name="firstname" placeholder="Enter Name" required />
                         </div>
-                        <div>
+                        <div class="inputsection">
                             <label id="lastnamelabel" class="formlabel" for="lastname">Surname</label>
                             <input id="lastname" class="input" name="lastname" placeholder="Enter Surname" required />
                         </div>
                     </div>
                     <div id="details" class="section">
                         <div class="sectionheader">Details</div>
-                        <label id="nidlabel" class="formlabel" for="nid">NID</label>
-                        <input id="nid" class="input" name="nid" placeholder="Enter NID" required />
-                        <label id="doblabel" class="formlabel" for="dob">Date of Birth</label>
-                        <input id="dob" name="dob" class="input" type="date" />
+                        <div class="inputsection">
+                            <label id="nidlabel" class="formlabel" for="nid">NID</label>
+                            <input id="nid" class="input" name="nid" placeholder="Enter NID" required />
+                        </div>
+                        <div class="inputsection">
+                            <label id="doblabel" class="formlabel" for="dob">Date of Birth</label>
+                            <input id="dob" name="dob" class="input" type="date" />
+                        </div>
                     </div>
                     <div id="contactdetails" class="section">
                         <div class="sectionheader">Contact Information</div>
-                        <label id="emaillabel" class="formlabel" for="email">Email</label>
-                        <input id="email" class="input" name="email" placeholder="Enter Email" required />
-                        <label id="phonenumberlabel" class="formlabel" for="phonenumber">Phone Number</label>
-                        <input id="phonenumber" class="input" name="phonenumber" placeholder="Enter Phone Number" required />
-                        <label id="guardiannamelabel" class="formlabel" for="guardianname">Guardian Name</label>
-                        <input id="guardianname" class="input" name="guardianname" placeholder="Enter Guardian Name" required />
+                        <div class="inputsection">
+                            <label id="emaillabel" class="formlabel" for="email">Email</label>
+                            <input id="email" class="input" name="email" placeholder="Enter Email" required />
+                        </div>                        
+                        <div class="inputsection">
+                            <label id="phonenumberlabel" class="formlabel" for="phonenumber">Phone Number</label>
+                            <input id="phonenumber" class="input" name="phonenumber" placeholder="Enter Phone Number" required />
+                        </div>                        
+                        <div class="inputsection">
+                            <label id="guardiannamelabel" class="formlabel" for="guardianname">Guardian Name</label>
+                            <input id="guardianname" class="input" name="guardianname" placeholder="Enter Guardian Name" required />
+                        </div>                        
                     </div>
                     <div id="results" class="section">
                         <div class="sectionheader">Results</div>
-                        <input type="button" onclick="addSubject()" value="Add" />
-                        <input type="button" onclick="removeSubject()" value="Remove" />
+                        <span>
+                            <input type="button" onclick="addSubject()" value="Add" />
+                            <input type="button" onclick="removeSubject()" value="Remove" />
+                        </span>
                         <div id="resultsinput"></div>
                     </div>   
                     <div id="submit-section">
