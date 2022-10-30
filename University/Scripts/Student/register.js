@@ -95,16 +95,66 @@ function addSubject() {
         main.append(gradeselect);
         $("#resultsinput").append(main);
         fillList();
-        console.log(currentSubject);
     }
 }
 function removeSubject() {
     if (currentSubject > minSubjects) {
         $("#resultsection" + currentSubject).remove();
         currentSubject--;
-        console.log(currentSubject);
     }   
 }
 function validate() {
-
+    console.log(validateInputs());
+}
+function validateInputs() {
+    const maxNameLength = 50
+    const nidLength = 14;
+    const phoneNumberLength = 8;
+    const phoneNumberPattern = '^\\d{' + phoneNumberLength + '}$';
+    const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var fname = $("#firstname").val();
+    var lname = $("#lastname").val();
+    var nid = $("#nid").val();
+    var email = $("#email").val();
+    var phonenumber = $("#phonenumber").val();
+    var guardianname = $("#guardianname").val();
+    var dob = $("#dob").val();
+    var subjects = [];
+    var grades = [];
+    for (let index = minSubjects; index <= currentSubject; index++) {
+        subjects.push($("#subject" + index).val());
+        grades.push($("#grade" + index).val());
+    }
+    var phoneNumberRegExp = new RegExp(phoneNumberPattern);
+    var emailRegExp = new RegExp(emailPattern)
+    if (fname.length == 0 || fname.length > maxNameLength) {
+        return "First Name is invalid";
+    }
+    if (lname.length == 0 || lname.length > maxNameLength) {
+        return "Last Name is invalid";
+    }
+    if (nid.length != nidLength) {
+        return "NID is invalid";
+    }
+    if (!dob) {
+        return "No dob inserted";
+    }
+    if (!emailRegExp.test(email)) {
+        return "Email is invalid";
+    }
+    if (!phoneNumberRegExp.test(phonenumber)) {
+        
+        return "Phone Number is invalid";
+    }
+    if (guardianname.length == 0 || guardianname.length > maxNameLength) {
+        return "Guardian Number is invalid";
+    }
+    
+    if (hasDuplicates(subjects)) {
+        return "Duplicate Subject selected";
+    }
+    return "All Good";
+}
+function hasDuplicates(array) {
+    return (new Set(array)).size !== array.length;
 }

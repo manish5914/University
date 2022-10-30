@@ -9,7 +9,7 @@
     <body onload="addSubject()">
         <div id="header">Register Student</div>
             <form>
-                <div id="form" onsubmit="registerStudent()">
+                <div id="form" onsubmit="validate()">
                     <div id="name" class="section">
                         <div class="sectionheader">Name</div>
                         <label id="firstnamelabel" class="formlabel" for="firstname">Enter Name</label>
@@ -41,7 +41,7 @@
 
                         <div id="resultsinput"></div>
                     </div>                
-                    <input id="registerbutton" type="submit" value="Register" /> 
+                    <input id="registerbutton" type="button" onclick="validate()" value="Register" /> 
                 </div>
             </form>
     </body>
