@@ -39,7 +39,6 @@ namespace University.Controllers
                 return Json(new { error = "User not Found" });
             }
         }
-        
         public ActionResult Welcome()
         {
             return View();
@@ -53,7 +52,6 @@ namespace University.Controllers
             Debug.WriteLine("Register Page");
             return View();
         }
-
         [HttpPost]
         public ActionResult RegisterUser(User user)
         {
@@ -64,12 +62,12 @@ namespace University.Controllers
             if (result == 1)
             {
                 Session["CurrentUser"] = user.Email;
+                Session["CurrentUserId"] = userBL.GetUserIDByEmail(user);
                 return Json(new { url = Url.Action("Welcome") });
             }
             else
             {
                 return Json(new { error = "User not Registered" });
-
             }
 
         }

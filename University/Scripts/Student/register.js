@@ -28,7 +28,7 @@ function getValues() {
     var dob = $("#dob").val();
     var subjects = [];
     var grades = [];
-    for (let index = minSubjects; index < maxSubjects; index++) {
+    for (let index = minSubjects; index <= maxSubjects; index++) {
         subjects.push($("#subject" + index).val());
         grades.push($("#grade" + index).val());
     }

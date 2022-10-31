@@ -10,11 +10,12 @@ namespace DataAccessLayer
 {
     public interface IStudentDAL
     {
-        void Add(Student student);
-        void AddResult(Student student);
-        string GetStudent(string studentId);
+        //void Add(Student student);
+        //void AddResult(Student student);
+        //string GetStudent(string studentId);
         DataTable GetSubjects();
         DataTable GetGrades();
+        void AddStudent(Student student);
 
     }
 }

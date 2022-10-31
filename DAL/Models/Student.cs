@@ -26,9 +26,10 @@ namespace DataAccessLayer.Models
         //[RegularExpression("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$", ErrorMessage = "Email input does not match expression")]
         public string Email { get; set; }
         public string GuardianName { get; set; }
+        public int UserId { get; set; }
         public string[] Subjects { get; set; }
         public char[] Grades { get; set; }
-       
+        
         public Student()
         {
 

@@ -14,6 +14,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Xml.Schema;
 using BCrypt = BCrypt.Net.BCrypt;
 
 namespace BusinessLayer
@@ -43,11 +44,15 @@ namespace BusinessLayer
                 return userByEmail;
             }
             return null; 
-           
         }
         private static bool AuthenticatePassword(User user, User userByEmail)
         {
             return (Encryption.HashPassword(user.Password, userByEmail.Salt) == userByEmail.Password) ? true : false;
+        }
+        public string GetUserIDByEmail(User user)
+        {
+            var userByEmail = userDAL.GetUserByEmail(user).FirstOrDefault();
+            return userByEmail.ID.ToString();
         }
     }
 }

@@ -45,6 +45,7 @@ namespace University.Controllers
             Debug.WriteLine("in post register");
             if (ModelState.IsValid)
             {
+                student.UserId = (int) Session["CurrentUserId"];
                 studentBL.Add(student);
                 return Json(new { url = Url.Action("../User/Welcome") });
             }else

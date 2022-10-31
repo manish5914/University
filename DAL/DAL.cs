@@ -41,5 +41,22 @@ namespace DataAccessLayer
             }
             dbconnection.CloseConnection();
         }
+        public static DataTable GetDataQurery(string query, DBConnection dbconnection)
+        {
+            DataTable dt = new DataTable();
+            using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
+            {
+                cmd.CommandType = CommandType.Text;
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    sda.Fill(dt);
+                }
+            }
+
+            dbconnection.CloseConnection();
+
+            return dt;
+        }
     }
+   
 }
