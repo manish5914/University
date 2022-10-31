@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 using DataAccessLayer.Models;
 
@@ -17,17 +18,36 @@ namespace DataAccessLayer
         }
         public int Add(User user)
         {
-             
-            SqlCommand sqlCommand = new SqlCommand($"insert into Users(Email, Password) values('{user.Email}','{user.Password}')", dbconnection.connection);
-            int executed = sqlCommand.ExecuteNonQuery();
-            dbconnection.CloseConnection();
-            return executed;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@UserID", user.ID));
+            parameters.Add(new SqlParameter("@Email", user.Email));
+            SqlParameter sqlPasswordParameter = new SqlParameter("@Password", Encoding.UTF8.GetBytes(user.Password));
+            sqlPasswordParameter.SqlDbType = SqlDbType.VarBinary;
+            parameters.Add(sqlPasswordParameter); 
+            SqlParameter sqlSaltParameter = new SqlParameter("@Salt", Encoding.UTF8.GetBytes(user.Salt));
+            sqlSaltParameter.SqlDbType = SqlDbType.VarBinary;
+            parameters.Add(sqlSaltParameter);
+
+            //SqlCommand sqlCommand = new SqlCommand($"insert into Users(Email, Password, Salt) values('{user.Email}','{Encoding.UTF8.GetBytes(user.Password)}'),'{Encoding.UTF8.GetBytes(user.Password)}')", dbconnection.connection);
+
+            //int executed = sqlCommand.ExecuteNonQuery();
+            //dbconnection.CloseConnection();
+            //return executed;
+            try
+            {
+                DAL.InsertUpdateData(SqlCommands.InsertUser, parameters, dbconnection);
+                return 1;
+            }
+            catch (Exception exception)
+            {
+                throw;
+            }   
             
         }
         public List<User> GetUsers()
         {
             List<User> users = new List<User>();
-            SqlCommand sqlCommand = new SqlCommand($"select UserId, Email, Password from Users", dbconnection.connection);
+            SqlCommand sqlCommand = new SqlCommand($"select UserId, Email, Password, Salt from Users", dbconnection.connection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
             dbconnection.OpenConnection();
             DataTable dataTable = new DataTable();
@@ -38,19 +58,19 @@ namespace DataAccessLayer
                 users.Add(new User(
                     Convert.ToInt32(row[0]),
                     Convert.ToString(row[1]),
-                    Convert.ToString(row[2])
+                    Convert.ToString(row[2]),
+                    Convert.ToString(row[3])
                     ));
 
             }
-            dbconnection.CloseConnection();
             return users;
         }
         public List<User> GetUserByEmail(User user)
         {
             List<User> users = new List<User>();
-            SqlCommand sqlCommand = new SqlCommand($"select UserId, Password from Users where Email = '{user.Email}'");
+            SqlCommand sqlCommand = new SqlCommand($"select UserId, Password, Salt from Users where Email = '{user.Email}'", dbconnection.connection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-
+            dbconnection.OpenConnection();
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
 
@@ -58,9 +78,10 @@ namespace DataAccessLayer
             {
                 users.Add(new User(
                     Convert.ToInt32(row[0]),
-                    Convert.ToString(row[1]),
-                    Convert.ToString(row[2])
-                    ));
+                    user.Email,
+                    Convert.ToString(Encoding.UTF8.GetString((byte[])row[1])),
+                    Convert.ToString((Encoding.UTF8.GetString((byte[])row[2])))
+                ));
             }
             dbconnection.CloseConnection();
             return users;

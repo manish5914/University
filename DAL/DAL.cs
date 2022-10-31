@@ -26,5 +26,20 @@ namespace DataAccessLayer
             dbconnection.CloseConnection();
             return dataTable;
         }
+        public static void InsertUpdateData(string query, List<SqlParameter> parameters, DBConnection dbconnection)
+        {
+            using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
+            {
+                cmd.CommandType = CommandType.Text;
+                if (parameters != null)
+                {
+                    parameters.ForEach(parameter => {
+                        cmd.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
+                    });
+                }
+                cmd.ExecuteNonQuery();
+            }
+            dbconnection.CloseConnection();
+        }
     }
 }

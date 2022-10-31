@@ -1,11 +1,20 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.Models;
+using Microsoft.SqlServer.Server;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Net.Security;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Web.Mvc;
+using BCrypt = BCrypt.Net.BCrypt;
 
 namespace BusinessLayer
 {
@@ -23,18 +32,22 @@ namespace BusinessLayer
         }
         public int Add(User user)
         {
+            user.Salt = Encryption.GetRandomSalt();
+            user.Password = Encryption.HashPassword(user.Password, user.Salt);
             return userDAL.Add(user);
         }
-        public User Login(User user)
+        public User AuthenticateUser(User user)
         {
-            return GetUsers().Where(u => user.Email == u.Email && user.Password == u.Password).FirstOrDefault();
+            var userByEmail = userDAL.GetUserByEmail(user).FirstOrDefault();
+            if (AuthenticatePassword(user, userByEmail)){
+                return userByEmail;
+            }
+            return null; 
+           
         }
-        private string EncryptPassword(string password)
+        private static bool AuthenticatePassword(User user, User userByEmail)
         {
-            byte[] encode = new byte[password.Length];
-            encode = Encoding.UTF8.GetBytes(password);
-            return (Convert.ToBase64String(encode));
-
+            return (Encryption.HashPassword(user.Password, userByEmail.Salt) == userByEmail.Password) ? true : false;
         }
     }
 }

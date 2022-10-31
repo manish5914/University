@@ -14,6 +14,7 @@ namespace DataAccessLayer
         public const string GetStudent = "select StudentId from Students where NID = @NID";
         public const string GetSubjects = "select SubjectId, SubjectName from Subjects";
         public const string GetGrades = "select Grade, GradeValue from Grades";
+        public const string InsertUser = "insert into Users(Email, Password, Salt) values(@Email, @Password, @Salt)";
 
     }
 }

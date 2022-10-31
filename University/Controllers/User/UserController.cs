@@ -27,10 +27,11 @@ namespace University.Controllers
         public ActionResult Login(User user)
         {
             Debug.WriteLine("Login");
-            User registeredUser = userBL.Login(user);
-            if (registeredUser != null)
+            User authenticatedUser = userBL.AuthenticateUser(user);
+            if (authenticatedUser != null)
             {
-                Session["CurrentUser"] = registeredUser.Email;
+                Session["CurrentUser"] = authenticatedUser.Email;
+                Session["CurrentUserId"] = authenticatedUser.ID;
                 return Json(new { url = Url.Action("Welcome") });
             }
             else
@@ -62,6 +63,7 @@ namespace University.Controllers
            
             if (result == 1)
             {
+                Session["CurrentUser"] = user.Email;
                 return Json(new { url = Url.Action("Welcome") });
             }
             else
