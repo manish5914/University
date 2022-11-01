@@ -77,7 +77,7 @@ namespace DataAccessLayer
         }
         public DataTable GetStudents()
         { 
-            return DAL.GetData(SqlCommands.GetStudents);
+            return DAL.GetData(SqlCommands.GetStudentsWithTotalGrade);
         }
     }
 }

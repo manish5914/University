@@ -16,6 +16,7 @@ namespace DataAccessLayer
         public const string InsertUser = "Begin Transaction; insert into Users(Email, Password, Salt) values(@Email, @Password, @Salt); commit;";
 
         public const string GetStudents = "select StudentId, NID, FirstName, LastName, PhoneNumber, DateOfBirth, GuardianName, UserId, Status from Students";
+        public const string GetStudentsWithTotalGrade = "Exec DisplayTableStudentWithTotalGrade";
         public const string GetUsers = "select UserId, Email, Password, Salt, RoleId from Users";
     }
 }
