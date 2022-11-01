@@ -20,10 +20,7 @@ namespace DataAccessLayer
         {
             dbconnection.OpenConnection();
             List<string> subjects = new List<string>();
-            SqlCommand sqlcommand = new SqlCommand($"select SubjectId, SubjectName from Subjects", dbconnection.connection);
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlcommand);
-            DataTable dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
+            DataTable dataTable = DAL.GetData(SqlCommands.GetSubjects, dbconnection);
             foreach (DataRow row in dataTable.Rows)
             {
                 subjects.Add(Convert.ToString(row[0]));
@@ -35,10 +32,7 @@ namespace DataAccessLayer
         {
             dbconnection.OpenConnection();
             List<Grades> grades = new List<Grades>();
-            SqlCommand sqlCommand = new SqlCommand($"select Grade, GradeValue from Grades", dbconnection.connection);
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCommand);
-            DataTable dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
+            DataTable dataTable = DAL.GetData(SqlCommands.GetGrades, dbconnection);
             foreach(DataRow row in dataTable.Rows)
             {
                 grades.Add(new Grades(Convert.ToChar(row[0]), Convert.ToInt32(row[1])));

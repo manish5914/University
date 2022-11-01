@@ -39,10 +39,10 @@ namespace DataAccessLayer
         }
         public List<User> GetUsers()
         {
+            
             List<User> users = new List<User>();
-            SqlCommand sqlCommand = new SqlCommand($"select UserId, Email, Password, Salt from Users", dbconnection.connection);
+            SqlCommand sqlCommand = new SqlCommand($"select UserId, Email, Password, Salt, RoldId from Users", dbconnection.connection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-            dbconnection.OpenConnection();
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
             foreach(DataRow row in dataTable.Rows)
@@ -51,7 +51,8 @@ namespace DataAccessLayer
                     Convert.ToInt32(row[0]),
                     Convert.ToString(row[1]),
                     Convert.ToString(row[2]),
-                    Convert.ToString(row[3])
+                    Convert.ToString(row[3]),
+                    Convert.ToInt32(row[4])
                     ));
             }
             return users;
@@ -59,9 +60,8 @@ namespace DataAccessLayer
         public List<User> GetUserByEmail(User user)
         {
             List<User> users = new List<User>();
-            SqlCommand sqlCommand = new SqlCommand($"select UserId, Password, Salt from Users where Email = '{user.Email}'", dbconnection.connection);
+            SqlCommand sqlCommand = new SqlCommand($"select UserId, Password, Salt, RoleId from Users where Email = '{user.Email}'", dbconnection.connection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-            dbconnection.OpenConnection();
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
             foreach (DataRow row in dataTable.Rows)
@@ -70,8 +70,9 @@ namespace DataAccessLayer
                     Convert.ToInt32(row[0]),
                     user.Email,
                     Convert.ToString(Encoding.UTF8.GetString((byte[])row[1])),
-                    Convert.ToString((Encoding.UTF8.GetString((byte[])row[2])))
-                ));
+                    Convert.ToString(Encoding.UTF8.GetString((byte[])row[2])),
+                    Convert.ToInt32(row[3])
+                )); 
             }
             dbconnection.CloseConnection();
             return users;

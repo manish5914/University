@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using DataAccessLayer;
 using DataAccessLayer.Models;
 using BusinessLayer;
+using System.Security.Permissions;
 
 namespace University.Controllers
 {
@@ -32,7 +33,19 @@ namespace University.Controllers
             {
                 Session["CurrentUser"] = authenticatedUser.Email;
                 Session["CurrentUserId"] = authenticatedUser.ID;
-                return Json(new { url = Url.Action("Welcome") });
+                Session["CurrentUserRole"] = authenticatedUser.RoleId;
+                if(authenticatedUser.RoleId == (int) Roles.Admin)
+                {
+                    return Json(new { url = Url.Action("Admin") });
+                }
+                else if (authenticatedUser.RoleId == (int)Roles.User)
+                {
+                    return Json(new { url = Url.Action("../Student/StudentDetails") });
+                }
+                else
+                {
+                    return Json(new { url = Url.Action("Welcome") });
+                }
             }
             else
             {
@@ -45,7 +58,7 @@ namespace University.Controllers
         }
         public JsonResult GetCurrentUser()
         {
-            return Json(new {currentUser = Session["CurrentUser"] }, JsonRequestBehavior.AllowGet);
+            return Json(new {currentUser = Session["CurrentUser"], currentUserId = Session["CurrentUserId"], currentUserRole = Session["CurrentUserRole"] }, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Register()
         {
@@ -59,14 +72,20 @@ namespace University.Controllers
             int result = userBL.Add(user);
             if (result == 1)
             {
-                Session["CurrentUser"] = user.Email;
-                Session["CurrentUserId"] = userBL.GetUserIDByEmail(user);
+                User registeredUser = userBL.GetUsers().Where(z => z.Email == user.Email).FirstOrDefault();
+                Session["CurrentUser"] = registeredUser.Email;
+                Session["CurrentUserId"] = registeredUser.ID;
+                Session["CurrentUserRole"] = registeredUser.RoleId;
                 return Json(new { url = Url.Action("Welcome") });
             }
             else
             {
                 return Json(new { error = "User not Registered" });
             }
+        }
+        public ActionResult Admin()
+        {
+            return View();
         }
     }
 }

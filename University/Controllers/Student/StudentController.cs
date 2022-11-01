@@ -54,5 +54,9 @@ namespace University.Controllers
                 return Json(new { error = "Student not registered" });
             }
         }
+        public ActionResult StudentDetails()
+        {
+            return View();
+        }
     }
 }

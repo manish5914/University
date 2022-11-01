@@ -215,6 +215,8 @@
     <Content Include="Views\Student\Register.cshtml">
       <BrowseToURL>~/Student/Register</BrowseToURL>
     </Content>
+    <Content Include="Views\Student\StudentDetails.cshtml" />
+    <Content Include="Views\User\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
