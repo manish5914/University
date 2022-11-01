@@ -11,11 +11,12 @@ namespace DataAccessLayer
 {
     public class StudentDAL : IStudentDAL
     {
-        DBConnection dbconnection;
-        public StudentDAL()
+        private readonly IDBConnection _dbConnection;
+        public StudentDAL(IDBConnection dBConnection)
         {
-            dbconnection = new DBConnection();
+            _dbConnection = dBConnection;
         }
+
         public DataTable GetSubjects()
         {
             return DAL.GetData(SqlCommands.GetSubjects);
@@ -48,13 +49,13 @@ namespace DataAccessLayer
                 }
                 
             }
-            SqlCommand sqlcommand = new SqlCommand("RegisterStudent", dbconnection.connection);
+            SqlCommand sqlcommand = new SqlCommand("RegisterStudent", _dbConnection.connection);
             sqlcommand.CommandType = CommandType.StoredProcedure;
             sqlcommand.Parameters.AddWithValue("@results", resultsTable);
             sqlcommand.Parameters.AddWithValue("@students", studentsTable);
-            dbconnection.OpenConnection();
+            _dbConnection.OpenConnection();
             sqlcommand.ExecuteNonQuery();
-            dbconnection.CloseConnection();
+            _dbConnection.CloseConnection();
         }
     }
 }

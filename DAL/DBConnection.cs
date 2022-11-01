@@ -7,14 +7,18 @@ using System.Configuration;
 
 namespace DataAccessLayer
 {
-    public class DBConnection
+
+
+    public class DBConnection : IDBConnection
     {
         string dbconnection = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
-        public SqlConnection connection;
+        public SqlConnection connection { get; set; }
+
 
         public DBConnection()
         {
-            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+           string connectionString = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+            connection = new SqlConnection(connectionString);
             OpenConnection();
         }
         public void OpenConnection()

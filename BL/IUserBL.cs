@@ -9,6 +9,8 @@ namespace BusinessLayer
         List<User> GetUsers();
         int Add(User user);
         string GetStudents();
+        User AuthenticateUser(User user);
+        string RedirectUser(User authenticatedUser);
 
     }
 }

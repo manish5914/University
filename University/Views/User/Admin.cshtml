@@ -22,29 +22,51 @@
                 }
             });
         }
-        let students;
+       
         function getStudents() {
-            $.ajax({
-                type: "GET",
-                url: "/User/GetStudents",
-                datatype: "json",
-                success: function (data) {
-                    if (data != null) {
-                        console.log(JSON.parse(data));
-                        students = JSON.parse(data);
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    type: "GET",
+                    url: "/User/GetStudents",
+                    datatype: "json",
+                    success: function (data) {
+                        if (data != null) {
+                            resolve(JSON.parse(data));
+                        }
+                    },
+                    error: function (error) {
+                        reject("No Students");
                     }
-                },
-                error: function () {
-                    console.log("No Students Found");
-                }
+                });
             });
-
-
         }
-        function fillTables() {
+
+        function fillTables() { 
+            getStudents().then((response) => {
+                if (response) {
+                    $.each(response, function (key, value) {
+                        let studentDetail = value;
+                        let studentRow = document.createElement("tr");
+                        $.each(Object.keys(studentDetail), function (key, value) {
+                            var studentData = document.createElement("td");
+                            studentData.textContent = studentDetail[value];
+                            studentRow.append(studentData);
+
+                        });
+                        $("#student-table").append(studentRow);
+                    });
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
             
         }
     </script>
+    <style>
+        #student-table, td, tr{
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body onload="start()">
     <h2>Admin Page</h2>
@@ -53,8 +75,19 @@
     <a href="/User/Register">User Registration</a>
     <a href="/User/Login">User Login</a>
     <button onclick="getStudents()">GetStudents</button>
-    <div id="sudent-table">
-
-    </div>
+    <button onclick="fillTables()">fillTables</button>
+    <table id="student-table">
+        <tr>
+            <th>StudentID</th>
+            <th>FirstName</th>
+            <th>Last Name</th>
+            <th>NID</th>
+            <th>Date of Birth</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>User ID</th>
+            <th>Status</th>
+        </tr>     
+    </table>
 </body>
 </html>

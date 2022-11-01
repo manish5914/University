@@ -19,7 +19,12 @@ namespace University.Controllers
 {
     public class StudentController : Controller
     {
-        StudentBL studentBL = new StudentBL();
+        private readonly IStudentBL _studentBL;
+        public StudentController(IStudentBL studentBL)
+        {
+            _studentBL = studentBL;
+        }
+
         
         public ActionResult Index()
         {
@@ -33,12 +38,12 @@ namespace University.Controllers
         public ActionResult GetSubjects()
         {
             Debug.WriteLine("In Subject");
-            return Json(studentBL.GetSubjects());
+            return Json(_studentBL.GetSubjects());
         }
         [HttpPost]
         public ActionResult GetGrades()
         {
-            return (Json(studentBL.GetGrades()));
+            return (Json(_studentBL.GetGrades()));
         }
         [HttpPost]
         public ActionResult Register(Student student)
@@ -47,7 +52,7 @@ namespace University.Controllers
             if (ModelState.IsValid)
             {
                 student.UserId = (int) Session["CurrentUserId"];
-                studentBL.Add(student);
+                _studentBL.Add(student);
                 return Json(new { url = Url.Action("../User/Welcome") });
             }else
             {

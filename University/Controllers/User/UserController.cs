@@ -14,7 +14,13 @@ namespace University.Controllers
 {
     public class UserController : Controller
     {
-        UserBL userBL = new UserBL();
+        private readonly IUserBL _userBL;
+
+        public UserController(IUserBL userBL)
+        {
+                _userBL = userBL;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -28,7 +34,7 @@ namespace University.Controllers
         public ActionResult Login(User user)
         {
             Debug.WriteLine("Login");
-            User authenticatedUser = userBL.AuthenticateUser(user);
+            User authenticatedUser = _userBL.AuthenticateUser(user);
             if (authenticatedUser == null)
             {
                 return Json(new { error = "User not Found" });    
@@ -36,7 +42,7 @@ namespace University.Controllers
             Session["CurrentUser"] = authenticatedUser.Email;
             Session["CurrentUserId"] = authenticatedUser.ID;
             Session["CurrentUserRole"] = authenticatedUser.RoleId;
-            return Json(new { url = Url.Action(userBL.RedirectUser(authenticatedUser)) });
+            return Json(new { url = Url.Action(_userBL.RedirectUser(authenticatedUser)) });
         }
         public ActionResult Welcome()
         {
@@ -55,12 +61,12 @@ namespace University.Controllers
         public ActionResult RegisterUser(User user)
         {
             Debug.WriteLine("Entered Register User");
-            int result = userBL.Add(user);
+            int result = _userBL.Add(user);
             if (result != 1)
             {
                 return Json(new { error = "User not Registered" });
             }
-            User registeredUser = userBL.GetUsers().Where(z => z.Email == user.Email).FirstOrDefault();
+            User registeredUser = _userBL.GetUsers().Where(z => z.Email == user.Email).FirstOrDefault();
             Session["CurrentUser"] = registeredUser.Email;
             Session["CurrentUserId"] = registeredUser.ID;
             Session["CurrentUserRole"] = registeredUser.RoleId;
@@ -72,7 +78,7 @@ namespace University.Controllers
         }
         public JsonResult GetStudents()
         {
-            return Json(userBL.GetStudents(), JsonRequestBehavior.AllowGet);
+            return Json(_userBL.GetStudents(), JsonRequestBehavior.AllowGet);
         }
     }
 }

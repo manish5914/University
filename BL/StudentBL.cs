@@ -12,10 +12,10 @@ namespace BusinessLayer
 {
     public class StudentBL : IStudentBL
     {
-        IStudentDAL _studentDAL;
-        public StudentBL()
+        private readonly IStudentDAL _studentDAL;
+        public StudentBL(IStudentDAL studentDAL)
         {
-            _studentDAL = new StudentDAL();
+            _studentDAL = studentDAL;
         }
         public void Add(Student student)
         {

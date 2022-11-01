@@ -1,49 +1,31 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.Models;
-using Microsoft.SqlServer.Server;
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Net.Security;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-using System.Web.Helpers;
-using System.Web.Mvc;
-using System.Web.Mvc.Filters;
-using System.Xml.Schema;
 using Newtonsoft.Json;
-using BCrypt = BCrypt.Net.BCrypt;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLayer
 {
     public class UserBL : IUserBL
     {
-        IUserDAL userDAL;
-        public UserBL()
+        private readonly IUserDAL _userDAL;
+        public UserBL(IUserDAL userDAL)
         {
-            userDAL = new UserDAL();
+            _userDAL = userDAL;
         }
         public List<User> GetUsers()
         {
-            return userDAL.GetUsers();
+            return _userDAL.GetUsers();
         }
         public int Add(User user)
         {
             user.Salt = Encryption.GetRandomSalt();
             user.Password = Encryption.HashPassword(user.Password, user.Salt);
-            return userDAL.Add(user);
+            return _userDAL.Add(user);
         }
         public User AuthenticateUser(User user)
         {
-            var userByEmail = userDAL.GetUserByEmail(user).FirstOrDefault();
+            var userByEmail = _userDAL.GetUserByEmail(user).FirstOrDefault();
             if (userByEmail == null)
             {
                 return null;
@@ -59,12 +41,12 @@ namespace BusinessLayer
         }
         public string GetUserIDByEmail(User user)
         {
-            var userByEmail = userDAL.GetUserByEmail(user).FirstOrDefault();
+            var userByEmail = _userDAL.GetUserByEmail(user).FirstOrDefault();
             return userByEmail.ID.ToString();
         }
         public string GetStudents()
         {
-            return JsonConvert.SerializeObject(userDAL.GetStudents());
+            return JsonConvert.SerializeObject(_userDAL.GetStudents());
         }
         public string RedirectUser(User authenticatedUser)
         {

@@ -12,10 +12,10 @@ namespace DataAccessLayer
 {
     public class UserDAL: IUserDAL
     {
-        DBConnection dbconnection;
-        public UserDAL()
+        private readonly IDBConnection _dbConnection;
+        public UserDAL(IDBConnection dbConnection)
         {
-            dbconnection = new DBConnection();
+            _dbConnection = dbConnection;
         }
         public int Add(User user)
         {
@@ -52,13 +52,13 @@ namespace DataAccessLayer
                     Convert.ToInt32(row[4])
                     ));
             }
-            dbconnection.CloseConnection();
+            _dbConnection.CloseConnection();
             return users;
         }
         public List<User> GetUserByEmail(User user)
         {
             List<User> users = new List<User>();
-            SqlCommand sqlCommand = new SqlCommand($"select UserId, Password, Salt, RoleId from Users where Email = '{user.Email}'", dbconnection.connection);
+            SqlCommand sqlCommand = new SqlCommand($"select UserId, Password, Salt, RoleId from Users where Email = '{user.Email}'", _dbConnection.connection);
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
@@ -72,7 +72,7 @@ namespace DataAccessLayer
                     Convert.ToInt32(row[3])
                 )); 
             }
-            dbconnection.CloseConnection();
+            _dbConnection.CloseConnection();
             return users;
         }
         public DataTable GetStudents()
