@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Models;
 using System.Collections.Generic;
+using System.Data;
 
 namespace BusinessLayer
 {
@@ -7,6 +8,7 @@ namespace BusinessLayer
     {
         List<User> GetUsers();
         int Add(User user);
+        string GetStudents();
 
     }
 }

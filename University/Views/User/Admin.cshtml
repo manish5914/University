@@ -22,6 +22,28 @@
                 }
             });
         }
+        let students;
+        function getStudents() {
+            $.ajax({
+                type: "GET",
+                url: "/User/GetStudents",
+                datatype: "json",
+                success: function (data) {
+                    if (data != null) {
+                        console.log(JSON.parse(data));
+                        students = JSON.parse(data);
+                    }
+                },
+                error: function () {
+                    console.log("No Students Found");
+                }
+            });
+
+
+        }
+        function fillTables() {
+            
+        }
     </script>
 </head>
 <body onload="start()">
@@ -30,5 +52,9 @@
     <a href="/Student/Register">Student Registration</a>
     <a href="/User/Register">User Registration</a>
     <a href="/User/Login">User Login</a>
+    <button onclick="getStudents()">GetStudents</button>
+    <div id="sudent-table">
+
+    </div>
 </body>
 </html>

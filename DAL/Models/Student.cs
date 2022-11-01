@@ -29,6 +29,7 @@ namespace DataAccessLayer.Models
         public int UserId { get; set; }
         public string[] Subjects { get; set; }
         public char[] Grades { get; set; }
+        public string Status { get; set; }
         
         public Student()
         {

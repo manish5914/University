@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using DataAccessLayer.Models;
+using System.Configuration;
 
 namespace DataAccessLayer
 {
@@ -29,7 +30,7 @@ namespace DataAccessLayer
             parameters.Add(sqlSaltParameter);
             try
             {
-                DAL.InsertUpdateData(SqlCommands.InsertUser, parameters, dbconnection);
+                DAL.InsertUpdateData(SqlCommands.InsertUser, parameters);
                 return 1;
             }
             catch (Exception exception)
@@ -39,12 +40,8 @@ namespace DataAccessLayer
         }
         public List<User> GetUsers()
         {
-            
             List<User> users = new List<User>();
-            SqlCommand sqlCommand = new SqlCommand($"select UserId, Email, Password, Salt, RoldId from Users", dbconnection.connection);
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
-            DataTable dataTable = new DataTable();
-            sqlDataAdapter.Fill(dataTable);
+            DataTable dataTable = DAL.GetData(SqlCommands.GetUsers);
             foreach(DataRow row in dataTable.Rows)
             {
                 users.Add(new User(
@@ -55,6 +52,7 @@ namespace DataAccessLayer
                     Convert.ToInt32(row[4])
                     ));
             }
+            dbconnection.CloseConnection();
             return users;
         }
         public List<User> GetUserByEmail(User user)
@@ -76,6 +74,10 @@ namespace DataAccessLayer
             }
             dbconnection.CloseConnection();
             return users;
+        }
+        public DataTable GetStudents()
+        { 
+            return DAL.GetData(SqlCommands.GetStudents);
         }
     }
 }

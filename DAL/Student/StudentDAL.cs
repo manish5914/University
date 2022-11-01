@@ -18,27 +18,11 @@ namespace DataAccessLayer
         }
         public DataTable GetSubjects()
         {
-            dbconnection.OpenConnection();
-            List<string> subjects = new List<string>();
-            DataTable dataTable = DAL.GetData(SqlCommands.GetSubjects, dbconnection);
-            foreach (DataRow row in dataTable.Rows)
-            {
-                subjects.Add(Convert.ToString(row[0]));
-            }
-            dbconnection.CloseConnection();
-            return dataTable;
+            return DAL.GetData(SqlCommands.GetSubjects);
         }
         public DataTable GetGrades()
         {
-            dbconnection.OpenConnection();
-            List<Grades> grades = new List<Grades>();
-            DataTable dataTable = DAL.GetData(SqlCommands.GetGrades, dbconnection);
-            foreach(DataRow row in dataTable.Rows)
-            {
-                grades.Add(new Grades(Convert.ToChar(row[0]), Convert.ToInt32(row[1])));
-            }
-            dbconnection.CloseConnection();
-            return dataTable;
+            return DAL.GetData(SqlCommands.GetGrades);
         }
         public void AddStudent(Student student)
         {
@@ -52,7 +36,8 @@ namespace DataAccessLayer
             studentsTable.Columns.Add(new DataColumn("DateOfBirth", typeof(DateTime)));
             studentsTable.Columns.Add(new DataColumn("GuardianName", typeof(string)));
             studentsTable.Columns.Add(new DataColumn("UserId", typeof(int)));
-            studentsTable.Rows.Add(student.NID, student.FirstName, student.LastName, student.Email, student.PhoneNumber, student.DateOfBirth, student.GuardianName, student.UserId);
+            studentsTable.Columns.Add(new DataColumn("Status", typeof(string)));
+            studentsTable.Rows.Add(student.NID, student.FirstName, student.LastName, student.Email, student.PhoneNumber, student.DateOfBirth, student.GuardianName, student.UserId, student.Status);
             resultsTable.Columns.Add(new DataColumn("SubjectId", typeof(int)));
             resultsTable.Columns.Add(new DataColumn("Grade", typeof(char)));
             if (student.Subjects.Length == student.Grades.Length)

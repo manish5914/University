@@ -19,7 +19,31 @@ namespace BusinessLayer
         }
         public void Add(Student student)
         {
+            student.Status = DetermineStatus(student.Grades);
             _studentDAL.AddStudent(student);
+        }
+        private string DetermineStatus(char[] results)
+        {
+            int totalGrade = 0;
+            Dictionary<char, int> grades = new Dictionary<char, int>();
+            DataTable gradeDT = DAL.GetData(SqlCommands.GetGrades);
+            foreach (DataRow dr in gradeDT.Rows)
+            {
+                grades.Add(Convert.ToChar(dr[0]), Convert.ToInt32(dr[1]));
+            }
+            foreach (char grade in results)
+            {
+                grades.TryGetValue(grade, out int gradeValue);
+                totalGrade += gradeValue;
+            }
+            if (totalGrade < 10)
+            {
+                return "Rejected";
+            }
+            else
+            {
+                return "Waiting";
+            }
         }
         public string GetSubjects()
         {

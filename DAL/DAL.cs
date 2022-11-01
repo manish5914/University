@@ -6,13 +6,16 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace DataAccessLayer
 {
     public static class DAL
     {
-        public static void InsertUpdateData(string query, List<SqlParameter> parameters, DBConnection dbconnection)
+        public static void InsertUpdateData(string query, List<SqlParameter> parameters)
         {
+            DBConnection dbconnection = new DBConnection();
+            dbconnection.OpenConnection();
             using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
             {
                 cmd.CommandType = CommandType.Text;
@@ -26,8 +29,10 @@ namespace DataAccessLayer
             }
             dbconnection.CloseConnection();
         }
-        public static DataTable GetData(string query, DBConnection dbconnection)
+        public static DataTable GetData(string query)
         {
+            DBConnection dbconnection = new DBConnection();
+            dbconnection.OpenConnection();
             DataTable dt = new DataTable();
             using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
             {
@@ -37,11 +42,8 @@ namespace DataAccessLayer
                     sda.Fill(dt);
                 }
             }
-
             dbconnection.CloseConnection();
-
             return dt;
         }
     }
-   
 }

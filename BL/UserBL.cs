@@ -11,10 +11,15 @@ using System.Linq;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.Mvc.Filters;
 using System.Xml.Schema;
+using Newtonsoft.Json;
 using BCrypt = BCrypt.Net.BCrypt;
 
 namespace BusinessLayer
@@ -39,6 +44,10 @@ namespace BusinessLayer
         public User AuthenticateUser(User user)
         {
             var userByEmail = userDAL.GetUserByEmail(user).FirstOrDefault();
+            if (userByEmail == null)
+            {
+                return null;
+            }
             if (AuthenticatePassword(user, userByEmail)){
                 return userByEmail;
             }
@@ -52,6 +61,29 @@ namespace BusinessLayer
         {
             var userByEmail = userDAL.GetUserByEmail(user).FirstOrDefault();
             return userByEmail.ID.ToString();
+        }
+        public string GetStudents()
+        {
+            return JsonConvert.SerializeObject(userDAL.GetStudents());
+        }
+        public string RedirectUser(User authenticatedUser)
+        {
+            if (authenticatedUser == null)
+            {
+                return "Login";
+            }
+            if (authenticatedUser.RoleId == (int)Roles.Admin)
+            {
+                return "Admin";
+            }
+            else if (authenticatedUser.RoleId == (int)Roles.User)
+            {
+                return "../Student/StudentDetails";
+            }
+            else
+            {
+                return "Welcome";
+            }
         }
     }
 }

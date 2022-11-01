@@ -10,11 +10,12 @@ namespace DataAccessLayer
 {
     public static class SqlCommands
     {
-        public const string RegisterStudent = "insert into Students(NID, FirstName, LastName, Email, PhoneNumber, GuardianName, DateOfBirth) values(@NID, @FirstName, @LastName, @Email, @PhoneNumber, @GuardianName, @DateOfBirth);";
         public const string GetStudent = "select StudentId from Students where NID = @NID";
         public const string GetSubjects = "select SubjectId, SubjectName from Subjects";
         public const string GetGrades = "select Grade, GradeValue from Grades";
-        public const string InsertUser = "insert into Users(Email, Password, Salt) values(@Email, @Password, @Salt)";
+        public const string InsertUser = "Begin Transaction; insert into Users(Email, Password, Salt) values(@Email, @Password, @Salt); commit;";
 
+        public const string GetStudents = "select StudentId, NID, FirstName, LastName, PhoneNumber, DateOfBirth, GuardianName, UserId, Status from Students";
+        public const string GetUsers = "select UserId, Email, Password, Salt, RoleId from Users";
     }
 }

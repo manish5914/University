@@ -14,7 +14,7 @@ namespace DataAccessLayer
 
         public DBConnection()
         {
-            connection = new SqlConnection(dbconnection);
+            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
             OpenConnection();
         }
         public void OpenConnection()

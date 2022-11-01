@@ -5,18 +5,18 @@ using System.Web;
 
 namespace DataAccessLayer.Models
 { 
-    public class Grades
+    public class Grade
     { 
-        public char Grade { get; set; }
+        public char Id { get; set; }
         public int GradeValue { get; set; }
 
-        public Grades()
+        public Grade()
         {
 
         }
-        public Grades(char grade, int gradeValue)
+        public Grade(char grade, int gradeValue)
         {
-            Grade = grade;
+            Id = grade;
             GradeValue = gradeValue;
         }   
     }
