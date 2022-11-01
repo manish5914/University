@@ -36,7 +36,6 @@ namespace DataAccessLayer
             {
                 throw;
             }   
-            
         }
         public List<User> GetUsers()
         {
@@ -46,7 +45,6 @@ namespace DataAccessLayer
             dbconnection.OpenConnection();
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
-
             foreach(DataRow row in dataTable.Rows)
             {
                 users.Add(new User(
@@ -55,7 +53,6 @@ namespace DataAccessLayer
                     Convert.ToString(row[2]),
                     Convert.ToString(row[3])
                     ));
-
             }
             return users;
         }
@@ -67,7 +64,6 @@ namespace DataAccessLayer
             dbconnection.OpenConnection();
             DataTable dataTable = new DataTable();
             sqlDataAdapter.Fill(dataTable);
-
             foreach (DataRow row in dataTable.Rows)
             {
                 users.Add(new User(

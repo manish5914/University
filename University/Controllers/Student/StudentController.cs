@@ -18,8 +18,9 @@ using System.Text.Json;
 namespace University.Controllers
 {
     public class StudentController : Controller
-    {  
+    {
         StudentBL studentBL = new StudentBL();
+        
         public ActionResult Index()
         {
             return View();

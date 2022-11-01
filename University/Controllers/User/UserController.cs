@@ -56,9 +56,7 @@ namespace University.Controllers
         public ActionResult RegisterUser(User user)
         {
             Debug.WriteLine("Entered Register User");
-
             int result = userBL.Add(user);
-           
             if (result == 1)
             {
                 Session["CurrentUser"] = user.Email;
@@ -69,7 +67,6 @@ namespace University.Controllers
             {
                 return Json(new { error = "User not Registered" });
             }
-
         }
     }
 }

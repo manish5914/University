@@ -16,39 +16,6 @@ namespace DataAccessLayer
         {
             dbconnection = new DBConnection();
         }
-        //public void Add(Student student)
-        //{ 
-        //    dbconnection.OpenConnection();
-        //    SqlCommand sqlCommand = new SqlCommand($"insert into Students(NID, FirstName, LastName, Email, PhoneNumber, GuardianName, DateOfBirth) " +
-        //        $"values('{student.NID}', '{student.FirstName}', '{student.LastName}','{student.Email}','{student.PhoneNumber}','{student.GuardianName}','{student.DateOfBirth}'); ", dbconnection.connection);           
-        //    sqlCommand.ExecuteNonQuery();
-        //    dbconnection.CloseConnection();
-        //}
-        //public void AddResult(Student student)
-        //{ 
-        //    dbconnection.OpenConnection();
-        //    SqlCommand sqlCommand;
-        //    var studentId = GetStudent(student.NID);
-        //    if (studentId != null)
-        //    {
-        //        if (student.Subjects.Length == student.Grades.Length)
-        //        {
-        //            for (int i = 0; i < student.Subjects.Length; i++)
-        //            {
-        //                sqlCommand = new SqlCommand($"insert into Results(StudentId, SubjectId, Grade) values('{studentId}','{student.Subjects[i]}','{student.Grades[i]}')", dbconnection.connection);
-        //                sqlCommand.ExecuteNonQuery();
-        //            }
-        //        }
-        //    }
-        //    dbconnection.CloseConnection(); 
-        //}
-        //public string GetStudent(string studentId)
-        //{
-        //    string query = $"select StudentId from Students where NID = '{studentId}'";
-        //    var students =  DAL.GetData(query);
-        //    return students.Rows.Count == 1 ? Convert.ToString(students.Rows[0][0]) : null;
-        //}
-
         public DataTable GetSubjects()
         {
             dbconnection.OpenConnection();
@@ -79,8 +46,6 @@ namespace DataAccessLayer
             dbconnection.CloseConnection();
             return dataTable;
         }
-
-
         public void AddStudent(Student student)
         {
             DataTable studentsTable = new DataTable();

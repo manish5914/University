@@ -21,11 +21,10 @@ namespace BusinessLayer
 {
     public class UserBL : IUserBL
     {
-        UserDAL userDAL = new UserDAL();
-        
+        IUserDAL userDAL;
         public UserBL()
         {
-
+            userDAL = new UserDAL();
         }
         public List<User> GetUsers()
         {

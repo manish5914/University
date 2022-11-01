@@ -19,8 +19,6 @@ namespace BusinessLayer
         }
         public void Add(Student student)
         {
-            //_studentDAL.Add(student);
-            //_studentDAL.AddResult(student);
             _studentDAL.AddStudent(student);
         }
         public string GetSubjects()
