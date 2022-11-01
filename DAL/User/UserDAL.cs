@@ -27,12 +27,6 @@ namespace DataAccessLayer
             SqlParameter sqlSaltParameter = new SqlParameter("@Salt", Encoding.UTF8.GetBytes(user.Salt));
             sqlSaltParameter.SqlDbType = SqlDbType.VarBinary;
             parameters.Add(sqlSaltParameter);
-
-            //SqlCommand sqlCommand = new SqlCommand($"insert into Users(Email, Password, Salt) values('{user.Email}','{Encoding.UTF8.GetBytes(user.Password)}'),'{Encoding.UTF8.GetBytes(user.Password)}')", dbconnection.connection);
-
-            //int executed = sqlCommand.ExecuteNonQuery();
-            //dbconnection.CloseConnection();
-            //return executed;
             try
             {
                 DAL.InsertUpdateData(SqlCommands.InsertUser, parameters, dbconnection);
