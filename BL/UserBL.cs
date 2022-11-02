@@ -48,6 +48,18 @@ namespace BusinessLayer
         {
             return JsonConvert.SerializeObject(_userDAL.GetStudents());
         }
+        public void ApproveStudents(int[] students)
+        {
+            _userDAL.UpdateStudent(ArrayToString(students));
+        }
+        private string ArrayToString(int[] students)
+        {
+            string studentParameter = "";
+            foreach(int student in students) {
+                studentParameter += student + ',';
+            }
+            return studentParameter.TrimEnd(',');
+        }
         public string RedirectUser(User authenticatedUser)
         {
             if (authenticatedUser == null)

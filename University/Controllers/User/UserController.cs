@@ -9,18 +9,17 @@ using DataAccessLayer;
 using DataAccessLayer.Models;
 using BusinessLayer;
 using System.Security.Permissions;
+using System.Web.Helpers;
 
 namespace University.Controllers
 {
     public class UserController : Controller
     {
         private readonly IUserBL _userBL;
-
         public UserController(IUserBL userBL)
         {
                 _userBL = userBL;
         }
-
         public ActionResult Index()
         {
             return View();
@@ -79,6 +78,11 @@ namespace University.Controllers
         public JsonResult GetStudents()
         {
             return Json(_userBL.GetStudents(), JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult ApproveStudents(string jsonResult)
+        {
+            return Json(new { success = "Approved Student" });
         }
     }
 }

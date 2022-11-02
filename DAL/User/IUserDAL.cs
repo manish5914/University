@@ -10,6 +10,6 @@ namespace DataAccessLayer
         List<User> GetUsers();
         List<User> GetUserByEmail(User user);
         DataTable GetStudents();
-
+        void UpdateStudent(string student);
     }
 }

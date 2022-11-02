@@ -16,7 +16,18 @@ namespace DataAccessLayer
         public const string InsertUser = "Begin Transaction; insert into Users(Email, Password, Salt) values(@Email, @Password, @Salt); commit;";
 
         public const string GetStudents = "select StudentId, NID, FirstName, LastName, PhoneNumber, DateOfBirth, GuardianName, UserId, Status from Students";
-        public const string GetStudentsWithTotalGrade = "Exec DisplayTableStudentWithTotalGrade";
+        public const string GetStudentsWithTotalGrade = @"select s.studentid,s.nid, s.firstname, s.lastname, s.email, s.phonenumber, s.dateofbirth, s.guardianname, s.userid, s.status, Total.TotalGrade from 
+		                                                    (select s.studentid, Sum(g.GradeValue ) as TotalGrade
+		                                                    from Results as r join 
+		                                                    Grades as g 
+			                                                    on r.Grade = g.Grade
+		                                                    join Students as s
+			                                                    on s.studentId = r.studentId
+		                                                    group by (s.studentid)) as Total 
+	                                                    join Students as s 
+	                                                    on Total.studentid = s.studentid
+	                                                    order by Total.TotalGrade desc";
         public const string GetUsers = "select UserId, Email, Password, Salt, RoleId from Users";
+        public const string ApproveStudents = "update students set status = 'Approve' where studentid in (@students)";
     }
 }

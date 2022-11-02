@@ -11,6 +11,7 @@ namespace BusinessLayer
         string GetStudents();
         User AuthenticateUser(User user);
         string RedirectUser(User authenticatedUser);
+        void ApproveStudents(int[] students);
 
     }
 }

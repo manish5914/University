@@ -79,5 +79,11 @@ namespace DataAccessLayer
         { 
             return DAL.GetData(SqlCommands.GetStudentsWithTotalGrade);
         }
+        public void UpdateStudent(string students)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("students", students));
+            DAL.InsertUpdateData(SqlCommands.ApproveStudents, parameters);
+        }
     }
 }
