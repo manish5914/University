@@ -80,8 +80,9 @@ namespace University.Controllers
             return Json(_userBL.GetStudents(), JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult ApproveStudents(string jsonResult)
+        public JsonResult ApproveStudents(ApprovedStudents student)
         {
+            _userBL.ApproveStudents(student.Students);
             return Json(new { success = "Approved Student" });
         }
     }

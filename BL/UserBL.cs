@@ -55,8 +55,9 @@ namespace BusinessLayer
         private string ArrayToString(int[] students)
         {
             string studentParameter = "";
-            foreach(int student in students) {
-                studentParameter += student + ',';
+            for(int index = 0; index < students.Length; index++)
+            {
+                studentParameter += students[index] + ",";
             }
             return studentParameter.TrimEnd(',');
         }

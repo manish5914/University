@@ -82,8 +82,8 @@ namespace DataAccessLayer
         public void UpdateStudent(string students)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("students", students));
-            DAL.InsertUpdateData(SqlCommands.ApproveStudents, parameters);
+            string query = SqlCommands.ApproveStudents +"("+ students+")";
+            DAL.InsertUpdateData(query, parameters);
         }
     }
 }

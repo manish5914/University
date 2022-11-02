@@ -82,17 +82,18 @@
                     });
                 }
                 console.log(approvedStudent);
-            }).catch((error) => {
+            }).catch((error) => {   
                 console.log(error);
             });
         }
         function approveStudents() {
-            let students = JSON.stringify({ approvedstudent: approvedStudent });
+            let approvedStudents = {};
+            approvedStudents.Students = approvedStudent;
             return new Promise((resolve, reject) => {
                 $.ajax({
                     type: "POST",
                     url: "/User/ApproveStudents",
-                    data: students,
+                    data: approvedStudents,
                     success: function (data) {
                         if (data != null) {
                             resolve(data);
