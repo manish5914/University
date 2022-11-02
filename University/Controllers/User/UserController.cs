@@ -26,13 +26,11 @@ namespace University.Controllers
         }
         public ActionResult Login()
         {
-            Debug.WriteLine("UserLogin");
             return View();
         }
         [HttpPost]
         public ActionResult Login(User user)
         {
-            Debug.WriteLine("Login");
             User authenticatedUser = _userBL.AuthenticateUser(user);
             if (authenticatedUser == null)
             {
@@ -53,23 +51,25 @@ namespace University.Controllers
         }
         public ActionResult Register()
         {
-            Debug.WriteLine("Register Page");
             return View();
         }
         [HttpPost]
         public ActionResult RegisterUser(User user)
         {
-            Debug.WriteLine("Entered Register User");
-            int result = _userBL.Add(user);
-            if (result != 1)
+            if (ModelState.IsValid)
             {
-                return Json(new { error = "User not Registered" });
+                int result = _userBL.Add(user);
+                if (result == UniversityConstants.rowAffectedZero)
+                {
+                    return Json(new { error = "User not Registered" });
+                }
+                User registeredUser = _userBL.GetUsers().Where(z => z.Email == user.Email).FirstOrDefault();
+                Session["CurrentUser"] = registeredUser.Email;
+                Session["CurrentUserId"] = registeredUser.ID;
+                Session["CurrentUserRole"] = registeredUser.RoleId;
+                return Json(new { url = _userBL.RedirectUser(registeredUser) });
             }
-            User registeredUser = _userBL.GetUsers().Where(z => z.Email == user.Email).FirstOrDefault();
-            Session["CurrentUser"] = registeredUser.Email;
-            Session["CurrentUserId"] = registeredUser.ID;
-            Session["CurrentUserRole"] = registeredUser.RoleId;
-            return Json(new { url = Url.Action("Welcome") });
+            return Json(new { error = "User not Registered" });
         }
         public ActionResult Admin()
         {
@@ -82,7 +82,11 @@ namespace University.Controllers
         [HttpPost]
         public JsonResult ApproveStudents(ApprovedStudents student)
         {
-            _userBL.ApproveStudents(student.Students);
+            Logger.LogError("Hello");
+            if(_userBL.ApproveStudents(student.Students) == UniversityConstants.rowAffectedZero)
+            {
+                return Json(new { error = "An Error Occured" });
+            }
             return Json(new { success = "Approved Student" });
         }
     }

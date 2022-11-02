@@ -23,8 +23,10 @@ namespace DataAccessLayer.Models
         public string PhoneNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
         [Required(ErrorMessage ="Email is required")]
-        //[RegularExpression("[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$", ErrorMessage = "Email input does not match expression")]
+        [RegularExpression("/^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/", ErrorMessage = "Email input does not match expression")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "LastName is required.")]
+        [StringLength(maximumLength: 50, ErrorMessage = "The Guardian must contain a max of 50 characters")]
         public string GuardianName { get; set; }
         public int UserId { get; set; }
         public string[] Subjects { get; set; }

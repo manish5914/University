@@ -8,7 +8,7 @@ namespace DataAccessLayer
 {
     public class UniversityConstants
     {
-        
+        public const int rowAffectedZero = 0;
     }
     public enum Roles
     {

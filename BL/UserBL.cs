@@ -48,9 +48,9 @@ namespace BusinessLayer
         {
             return JsonConvert.SerializeObject(_userDAL.GetStudents());
         }
-        public void ApproveStudents(int[] students)
+        public int ApproveStudents(int[] students)
         {
-            _userDAL.UpdateStudent(ArrayToString(students));
+            return _userDAL.UpdateStudent(ArrayToString(students));
         }
         private string ArrayToString(int[] students)
         {
@@ -73,7 +73,7 @@ namespace BusinessLayer
             }
             else if (authenticatedUser.RoleId == (int)Roles.User)
             {
-                return "../Student/StudentDetails";
+                return "../Student/Detail";
             }
             else
             {

@@ -29,5 +29,6 @@ namespace DataAccessLayer
 	                                                    order by Total.TotalGrade desc";
         public const string GetUsers = "select UserId, Email, Password, Salt, RoleId from Users";
         public const string ApproveStudents = "update students set status = 'Approved' where studentid in ";
+        public const string GetUserByEmail = "select UserId, Password, Salt, RoleId from Users where Email = @Email";
     }
 }

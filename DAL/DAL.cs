@@ -7,43 +7,92 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.Diagnostics;
+using System.ComponentModel;
+using Serilog;
 
 namespace DataAccessLayer
 {
     public static class DAL
     {
-        public static void InsertUpdateData(string query, List<SqlParameter> parameters)
+        public static int InsertUpdateData(string query, List<SqlParameter> parameters)
         {
-            DBConnection dbconnection = new DBConnection();
-            dbconnection.OpenConnection();
-            using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
+            try
             {
-                cmd.CommandType = CommandType.Text;
-                if (parameters != null)
+                DBConnection dbconnection = new DBConnection();
+                dbconnection.OpenConnection();
+                int rowAffected;
+                using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
                 {
-                    parameters.ForEach(parameter => {
-                        cmd.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
-                    });
+                    cmd.CommandType = CommandType.Text;
+                    if (parameters != null)
+                    {
+                        parameters.ForEach(parameter => {
+                            cmd.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
+                        });
+                    }
+                    rowAffected = cmd.ExecuteNonQuery();
                 }
-                cmd.ExecuteNonQuery();
+                dbconnection.CloseConnection();
+                return rowAffected;
             }
-            dbconnection.CloseConnection();
+            catch (Exception exception)
+            {                
+                Debug.WriteLine(exception.Message);
+                return UniversityConstants.rowAffectedZero;  
+            }
         }
         public static DataTable GetData(string query)
         {
-            DBConnection dbconnection = new DBConnection();
-            dbconnection.OpenConnection();
-            DataTable dt = new DataTable();
-            using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
+            try
             {
-                cmd.CommandType = CommandType.Text;
-                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                DBConnection dbconnection = new DBConnection();
+                dbconnection.OpenConnection();
+                DataTable dt = new DataTable();
+                using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
                 {
-                    sda.Fill(dt);
+                    cmd.CommandType = CommandType.Text;
+                    using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                    {
+                        sda.Fill(dt);
+                    }
                 }
+                dbconnection.CloseConnection();
+                return dt;
+            }catch(Exception exception)
+            {
+                Debug.WriteLine(exception);
+                return null;
             }
-            dbconnection.CloseConnection();
-            return dt;
+        }
+        public static DataTable GetDataWithParameters(string query, List<SqlParameter> parameters)
+        {
+            try
+            {
+                DBConnection dbconnection = new DBConnection();
+                dbconnection.OpenConnection();
+                DataTable dt = new DataTable();
+                using (SqlCommand cmd = new SqlCommand(query, dbconnection.connection))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    if (parameters != null)
+                    {
+                        parameters.ForEach(parameter => {
+                            cmd.Parameters.AddWithValue(parameter.ParameterName, parameter.Value);
+                        });
+                    }
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    sda.Fill(dt);
+                    
+                }
+                dbconnection.CloseConnection();
+                return dt;
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
+                return null;
+            }
         }
     }
 }

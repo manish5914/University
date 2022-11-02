@@ -14,7 +14,7 @@
                     success: function (data) {
                         resolve(data);
                     },
-                    error: function (data) {
+                    error: function () {
                         reject("No user received");
                     }
                 });
@@ -95,21 +95,27 @@
                     url: "/User/ApproveStudents",
                     data: approvedStudents,
                     success: function (data) {
-                        if (data != null) {
-                            resolve(data);
+                        if (data.success != null) {
+                            resolve(data.success);
                         }
-                    }, error: function (error) {
-                        reject(error);
+                        if (data.error != null) {
+                            reject(data.error);
+                        }
+                    }, error: function () {
+                        reject("An Error occured");
                     }
                 })
             })
         };
         function adminApprove() {
             approveStudents().then((response) => {
-                console.log(response);
+                toastr.info(response);
             }).catch((reject) => {
-                console.log(reject);
+                toastr.error(reject)
             });
+        }
+        function register() {
+            toastr.info('Page Under construction!!');
         }
     </script>
     <style>
@@ -132,7 +138,7 @@
     <a href="/User/Login">User Login</a>
     <button onclick="getStudents()">GetStudents</button>
     <button onclick="fillTables()">fillTables</button>
-    <button onclick="adminApprove()">ApproveStudents</button>
+    <button onclick="adminApprove()">register()</button>
     <table id="student-table">
         <tr>
             <th>StudentID</th>

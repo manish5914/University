@@ -37,7 +37,6 @@ namespace University.Controllers
         [HttpPost]
         public ActionResult GetSubjects()
         {
-            Debug.WriteLine("In Subject");
             return Json(_studentBL.GetSubjects());
         }
         [HttpPost]
@@ -48,7 +47,6 @@ namespace University.Controllers
         [HttpPost]
         public ActionResult Register(Student student)
         {
-            Debug.WriteLine("in post register");
             if (ModelState.IsValid)
             {
                 student.UserId = (int) Session["CurrentUserId"];
@@ -59,7 +57,7 @@ namespace University.Controllers
                 return Json(new { error = "Student not registered" });
             }
         }
-        public ActionResult StudentDetails()
+        public ActionResult Detail()
         {
             return View();
         }
