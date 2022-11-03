@@ -4,8 +4,9 @@ namespace BusinessLayer
 {
     public interface IStudentBL
     {
-        void Add(Student student);
+        int Add(Student student);
         string GetSubjects();
         string GetGrades();
+        Student GetStudent(Student student);
     }
 }

@@ -140,3 +140,24 @@ function jsonToCsv(students) {
     const csv = [headerString, ...rowItems].join('\r\n');
     return csv;
 }
+function Logout() {
+    LogoutAjax().then((response) => {
+        window.location = response.url;
+    }).catch((reject) => {
+        toastr.error(reject);
+    })
+}
+function LogoutAjax() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "GET",
+            url: "/User/Logout",
+            success: function (data) {
+                resolve(data);
+            },
+            error: function () {
+                reject("Cannot Logout");
+            }
+        });
+    });
+}

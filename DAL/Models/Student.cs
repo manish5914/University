@@ -37,5 +37,18 @@ namespace DataAccessLayer.Models
         {
 
         }
+        public Student(int studentId, string nID, string firstName, string lastName,  string phoneNumber, DateTime dateOfBirth, string email, string guardianName, int userId, string status)
+        {
+            StudentId = studentId;
+            FirstName = firstName;
+            LastName = lastName;
+            NID = nID;
+            PhoneNumber = phoneNumber;
+            DateOfBirth = dateOfBirth;
+            Email = email;
+            GuardianName = guardianName;
+            UserId = userId;
+            Status = status;
+        }
     }
 }

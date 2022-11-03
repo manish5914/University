@@ -112,5 +112,11 @@ namespace University.Controllers
             logger.Info("Approved Student");
             return Json(new { success = "Approved Student" });
         }
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return Json(new { url = Url.Action("") }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

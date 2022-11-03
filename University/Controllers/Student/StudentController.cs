@@ -59,14 +59,18 @@ namespace University.Controllers
             {
                 if (Session["currentUserId"] == null)
                 {
-
                     logger.Error("Not Currently Logged in..");
                     return Json(new { error = "Not Currently Logged in.." });
                 }
                 logger.Info("Register Student");
                 student.UserId = (int) Session["CurrentUserId"];
-                _studentBL.Add(student);
-                return Json(new { url = Url.Action("../User/Login") });
+                int rowAffected = _studentBL.Add(student);
+                if(rowAffected > 0)
+                {
+                    logger.Info("redirecting User");
+                    return Json(new { url = Url.Action("../User/Login") });
+                }
+                return Json(new { error = "Not Registered" });
                 
             }
             else
@@ -85,5 +89,24 @@ namespace University.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public JsonResult GetCurrentStudent()
+        {
+            Student student = new Student();
+            if (Session["CurrentUserId"] == null)
+            {
+                logger.Error("Can not get Student because User is not logged in");
+                return Json(new { error = "Can not get Student because User is not logged in" }, JsonRequestBehavior.AllowGet);
+            }
+            student.UserId = (int) Session["CurrentUserId"];
+            student = _studentBL.GetStudent(student);
+            if(student == null)
+            {
+                logger.Error("No Student Found");
+                return Json(new { error = "No StudentFound" }, JsonRequestBehavior.AllowGet);
+            }
+            logger.Info("Got Student");
+            return Json(student, JsonRequestBehavior.AllowGet);
+        } 
     }
 }

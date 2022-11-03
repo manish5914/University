@@ -7,7 +7,7 @@
                 window.location = response.url;
             }
             if (response.error) {
-                toastr.error(error);
+                toastr.error(response.error);
             }
         }).catch((reject) => {
             toastr.error(reject);
@@ -22,7 +22,6 @@ function registerStudentAjax(studentDetails) {
             data: studentDetails,
             success: function (data) {
                 resolve(data);
-               
             },
             error: function () {
                 reject("What broke ?, Your soul did");

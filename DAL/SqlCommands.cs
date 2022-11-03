@@ -15,7 +15,8 @@ namespace DataAccessLayer
         public const string GetGrades = "select Grade, GradeValue from Grades";
         public const string InsertUser = "Begin Transaction; insert into Users(Email, Password, Salt) values(@Email, @Password, @Salt); commit;";
 
-        public const string GetStudents = "select StudentId, NID, FirstName, LastName, PhoneNumber, DateOfBirth, GuardianName, UserId, Status from Students";
+        public const string GetStudents = "select StudentId, NID, FirstName, LastName, PhoneNumber, DateOfBirth, Email, GuardianName, UserId, Status from Students";
+        public const string GetStudentByUserId = "select StudentId, NID, FirstName, LastName, PhoneNumber, DateOfBirth, Email, GuardianName, UserId, Status from Students where UserId = @UserId";
         public const string GetStudentsWithTotalGrade = @"select s.studentid,s.nid, s.firstname, s.lastname, s.email, s.phonenumber, s.dateofbirth, s.guardianname, s.userid, s.status, Total.TotalGrade from 
 		                                                    (select s.studentid, Sum(g.GradeValue ) as TotalGrade
 		                                                    from Results as r join 

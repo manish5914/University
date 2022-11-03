@@ -17,10 +17,10 @@ namespace BusinessLayer
         {
             _studentDAL = studentDAL;
         }
-        public void Add(Student student)
+        public int Add(Student student)
         {
             student.Status = DetermineStatus(student.Grades);
-            _studentDAL.AddStudent(student);
+            return _studentDAL.AddStudent(student);
         }
         private string DetermineStatus(char[] results)
         {
@@ -52,6 +52,10 @@ namespace BusinessLayer
         public string GetGrades()
         {
             return JsonConvert.SerializeObject(_studentDAL.GetGrades());
+        }
+        public Student GetStudent(Student student)
+        {
+            return _studentDAL.GetStudent(student).FirstOrDefault();
         }
     }
 }

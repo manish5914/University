@@ -12,7 +12,8 @@ namespace DataAccessLayer
     {
         DataTable GetSubjects();
         DataTable GetGrades();
-        void AddStudent(Student student);
+        int AddStudent(Student student);
+        List<Student> GetStudent(Student student);
 
     }
 }
