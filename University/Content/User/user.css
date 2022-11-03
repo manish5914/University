@@ -20,8 +20,8 @@ height: 100vh;
 .login-box {
 background-color: #fff;
 padding: 40px;
-min-width: 500px;
-max-width: 700px;
+min-width: 60%;
+max-width: 70%;
 border-radius: 7px;
 
 box-shadow: 5px 5px 20px black;
@@ -86,13 +86,14 @@ box-shadow: 5px 5px 20px black;
     border-radius: 5px;
     outline: none;
     border: none;
-    border-left: 2px solid #03e9f4;
     padding: 15px 0;
     font-size: 16px;
     color: #fff;
     background: #396afc;
     background: linear-gradient(to right, #2948ff, #396afc);
     margin-top: 30px;
+    margin-left: 2px;
+    margin-right:2px;
     cursor: pointer;
 }
 
@@ -110,4 +111,18 @@ box-shadow: 5px 5px 20px black;
     }
 .invalid {
     border: 1px solid red;
+}
+
+.options {
+    display: flex;
+}
+
+#student-table {
+    margin-top: 25px;
+    table-layout: auto;
+    min-width: 100px;
+    width: 100%;
+    background: #0080cf;
+    color: white;
+
 }
