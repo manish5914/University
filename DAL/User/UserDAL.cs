@@ -7,6 +7,7 @@ using System.Text;
 using System.Web;
 using DataAccessLayer.Models;
 using System.Configuration;
+using System.Security.Policy;
 
 namespace DataAccessLayer
 {
@@ -83,6 +84,13 @@ namespace DataAccessLayer
             List<SqlParameter> parameters = new List<SqlParameter>();
             string query = SqlCommands.ApproveStudents +"("+ students+")";
             return DAL.InsertUpdateData(query, parameters);
+        }
+        public int GetStudentCountByUserId(User user)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@UserId", user.ID));
+            DataTable datatable = DAL.GetDataWithParameters(SqlCommands.GetStudentCountByUserID, parameters);
+            return (int)datatable.Rows[0][0];
         }
     }
 }

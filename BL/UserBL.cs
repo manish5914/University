@@ -61,18 +61,22 @@ namespace BusinessLayer
             }
             return studentParameter.TrimEnd(',');
         }
-        public string RedirectUser(User authenticatedUser)
+        public string RedirectUser(User user)
         {
-            if (authenticatedUser == null)
+            if (user == null)
             {
                 return "Login";
             }
-            if (authenticatedUser.RoleId == (int)Roles.Admin)
+            if (user.RoleId == (int)Roles.Admin)
             {
                 return "Admin";
             }
-            else if (authenticatedUser.RoleId == (int)Roles.User)
+            else if (user.RoleId == (int)Roles.User)
             {
+                if (_userDAL.GetStudentCountByUserId(user) == 0)
+                {
+                    return "../Student/Register";
+                }
                 return "../Student/Detail";
             }
             else

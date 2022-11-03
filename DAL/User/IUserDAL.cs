@@ -11,5 +11,6 @@ namespace DataAccessLayer
         List<User> GetUserByEmail(User user);
         DataTable GetStudents();
         int UpdateStudent(string student);
+        int GetStudentCountByUserId(User user);
     }
 }
