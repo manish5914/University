@@ -40,18 +40,28 @@ function loginUserAjax(user) {
 function validateEmail() {
     const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var emailRegExp = new RegExp(emailPattern)
-    email = $("#email").val();
-    if (!emailRegExp.test(email)) {
+    var email = $("#email");
+    if (!emailRegExp.test(email.val())) {
+        email.addClass("invalid");
         toastr.info("Email is invalid");
         return false;
     }
-    else { return true; }
+    else {
+        if (email.hasClass("invalid")) {
+            email.removeClass("invalid");
+        }
+        return true;
+    }
 }
 function validatePassword() {
-    password = $("#password").val();
-    if (password.length < 8) {
+    password = $("#password");
+    if (password.val().length < 8) {
+        password.addClass("invalid");
         toastr.info("Password is too Short");
         return false;
+    }
+    if (password.hasClass("invalid")) {
+        password.removeClass("invalid");
     }
     return true;
 }

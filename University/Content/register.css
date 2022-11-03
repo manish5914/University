@@ -189,6 +189,9 @@ select{
     font-size: 16px;
     
 }
+.invalid{
+    border: 1px solid red;
+}
 @media (max-width: 600px) {
     body {
         background-color: gray;

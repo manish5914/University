@@ -1,22 +1,34 @@
 ﻿function registerStudent() {
-    var studentDetails = getValues();
-    $.ajax({
-        type: "POST",
-        url: "/Student/Register",
-        data: studentDetails,
-        success: function (data) {
-            if (data.url) {
+    if (validateInputs()) {
+        var studentDetails = getValues();
+        registerStudentAjax(studentDetails).then((response) => {
+            if (response.url) {
                 console.log("added student");
-                window.location = data.url;
+                window.location = response.url;
             }
-            if (data.error) {
-                alert(data.error);
+            if (response.error) {
+                toastr.error(error);
             }
-        },
-        error: function () {
-            console.log("What broke ?, Your soul did");
-        }
-    });
+        }).catch((reject) => {
+            toastr.error(reject);
+        })
+    }
+}
+function registerStudentAjax(studentDetails) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "/Student/Register",
+            data: studentDetails,
+            success: function (data) {
+                resolve(data);
+               
+            },
+            error: function () {
+                reject("What broke ?, Your soul did");
+            }
+        });
+    })
 }
 function getValues() {
     var fname = $("#firstname").val();
@@ -47,36 +59,58 @@ function getValues() {
 }
 var numberofinput = 3;
 function fillList() {
-    $.ajax({
-        type: "POST",
-        url: "/Student/GetSubjects",
-        data: "",
-        success: function (data) {
-            var jsonSubjects = JSON.parse(data);
-            $.each(jsonSubjects, function (key, value) {
-                var subjectoption = document.createElement("option");
-                subjectoption.value = value.SubjectId;
-                subjectoption.text = value.SubjectName;
-                $("#subject" + currentSubject).append(subjectoption);    
-            });
-        }, error: function () {
-            console.log("Error");
-        }
-    });
-    $.ajax({
-        type: "POST",
-        url: "/Student/GetGrades",
-        data: "",
-        success: function (data) {
-            var jsonGrades = JSON.parse(data);
-            $.each(jsonGrades, function (key, value) {
-                var gradeoption = document.createElement("option");
-                gradeoption.value = value.Grade;
-                gradeoption.text = value.Grade;
-                $("#grade" + currentSubject).append(gradeoption);           
-            });
-        }
-    });
+    GetSubjectsAjax().then((response) => {
+        var jsonSubjects = JSON.parse(response);
+        $.each(jsonSubjects, function (key, value) {
+            var subjectoption = document.createElement("option");
+            subjectoption.value = value.SubjectId;
+            subjectoption.text = value.SubjectName;
+            $("#subject" + currentSubject).append(subjectoption);
+        });
+    }).catch((reject) => {
+        toastr.error(reject);
+    })
+    GetGradesAjax().then((response) => {
+        var jsonGrades = JSON.parse(response);
+        $.each(jsonGrades, function (key, value) {
+            var gradeoption = document.createElement("option");
+            gradeoption.value = value.Grade;
+            gradeoption.text = value.Grade;
+            $("#grade" + currentSubject).append(gradeoption);
+        });
+    }).catch((reject) => {
+        toastr.error(reject);
+    })
+}
+function GetGradesAjax() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "/Student/GetGrades",
+            data: "",
+            success: function (data) {
+                resolve(data);
+            },
+            error: function () {
+                reject("No Grades Received");
+            }
+        });
+    })
+}
+function GetSubjectsAjax() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "POST",
+            url: "/Student/GetSubjects",
+            data: "",
+            success: function (data) {
+                resolve(data);
+                
+            }, error: function () {
+                reject("No Subject Received");
+            }
+        });
+    })
 }
 const maxSubjects = 3;
 const minSubjects = 1;
@@ -108,57 +142,132 @@ function removeSubject() {
         currentSubject--;
     }   
 }
-function validate() {
-    console.log(validateInputs());
-}
 function validateInputs() {
-    const maxNameLength = 50
-    const nidLength = 14;
-    const phoneNumberLength = 8;
-    const phoneNumberPattern = '^\\d{' + phoneNumberLength + '}$';
-    const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    var fname = $("#firstname").val();
-    var lname = $("#lastname").val();
-    var nid = $("#nid").val();
-    var email = $("#email").val();
-    var phonenumber = $("#phonenumber").val();
-    var guardianname = $("#guardianname").val();
-    var dob = $("#dob").val();
+    if (!validateFirstName()) {
+        return false;
+    }
+    if (!validateLastName()) {
+        return false;
+    }
+    if (!validateNID()) {
+        return false;
+    }
+    if (!validateDateOfBirth()) {
+        return false;
+    }
+    if (!validateEmail()) {
+        return false;
+    }
+    if (!validatePhoneNumber()) {
+        return false;
+    }
+    if (!validateGuardianName()) {
+        return false;
+    }
+    if (!validateSubjects()) {
+        return false;
+    }
+    return true;
+}
+function validateSubjects() {
     var subjects = [];
     var grades = [];
     for (let index = minSubjects; index <= currentSubject; index++) {
         subjects.push($("#subject" + index).val());
         grades.push($("#grade" + index).val());
     }
-    var phoneNumberRegExp = new RegExp(phoneNumberPattern);
-    var emailRegExp = new RegExp(emailPattern)
-    if (fname.length == 0 || fname.length > maxNameLength) {
-        return "First Name is invalid";
-    }
-    if (lname.length == 0 || lname.length > maxNameLength) {
-        return "Last Name is invalid";
-    }
-    if (nid.length != nidLength) {
-        return "NID is invalid";
-    }
-    if (!dob) {
-        return "No dob inserted";
-    }
-    if (!emailRegExp.test(email)) {
-        return "Email is invalid";
-    }
-    if (!phoneNumberRegExp.test(phonenumber)) {
-        
-        return "Phone Number is invalid";
-    }
-    if (guardianname.length == 0 || guardianname.length > maxNameLength) {
-        return "Guardian Number is invalid";
-    }
-    
     if (hasDuplicates(subjects)) {
-        return "Duplicate Subject selected";
+        toastr.info("Duplicate Subjects added");
+        return false; //"Duplicate Subject selected";
     }
-    return "All Good";
+    return true;
+}
+function validateDateOfBirth() {
+    var dob = $("#dob");
+    if (!dob.val()) {
+        dob.addClass("invalid");
+        return false; // "No dob inserted";
+    }
+    if (dob.hasClass("invalid")) {
+        dob.removeClass("invalid")
+    }
+    return true;
+}
+function validateEmail() {
+    const emailPattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var emailRegExp = new RegExp(emailPattern)
+    var email = $("#email");
+    if (!emailRegExp.test(email.val())) {
+        email.addClass("invalid");
+        toastr.info("Email is invalid");
+        return false;
+    }
+    else {
+        if (email.hasClass("invalid")) {
+            email.removeClass("invalid");
+        }
+        return true;
+    }
+}
+const maxNameLength = 50;
+function validateFirstName() {
+    var name = $("#firstname");
+    if (name.val().length == 0 || name.val().length > maxNameLength) {
+        name.addClass("invalid");
+        return false; //"Name is invalid";
+    }
+    if (name.hasClass("invalid")) {
+        name.removeClass("invalid")
+    }
+    return true;
+}
+function validateLastName() {
+    var lastname = $("#lastname");
+    if (lastname.val().length == 0 || lastname.val().length > maxNameLength) {
+        lastname.addClass("invalid");
+        return false;
+    }
+    if (lastname.hasClass("invalid")) {
+        lastname.removeClass("invalid");
+    }
+    return true;
+}
+function validateGuardianName() {
+    var guardianname = $("#guardianname");
+    if (guardianname.val().length == 0 || guardianname.val().length > maxNameLength) {
+        guardianname.addClass("invalid");
+        return false;
+    }
+    if (guardianname.hasClass("invalid")) {
+        guardianname.removeClass("invalid");
+    }
+    return true;
+}
+function validateNID() {
+    const nidLength = 14;
+    var nid = $("#nid");
+    if (nid.val().length != nidLength) {
+        nid.addClass("invalid");
+        return false; //"NID is invalid";
+    }
+    if (nid.hasClass("invalid")) {
+        nid.removeClass("invalid");
+    }
+    return true;
+}
+function validatePhoneNumber(){
+    const phoneNumberLength = 8;
+    const phoneNumberPattern = '^\\d{' + phoneNumberLength + '}$';
+    var phonenumber = $("#phonenumber");
+    var phoneNumberRegExp = new RegExp(phoneNumberPattern);
+    if (!phoneNumberRegExp.test(phonenumber.val())) {
+        phonenumber.addClass("invalid");
+        return false; //"Phone Number is invalid";
+    }
+    if (phonenumber.hasClass("invalid")) {
+        phonenumber.removeClass("invalid");
+    }
+    return true;
 }
 function hasDuplicates(array) {
     return (new Set(array)).size !== array.length;
