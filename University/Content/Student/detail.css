@@ -1,0 +1,64 @@
+﻿
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+body,
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Space Grotesk", sans-serif;
+}
+
+body {
+    background: #005c97;
+    background: linear-gradient(to right, #4648dd, #0080cf);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 40px;
+    min-width: 500px;
+    max-width: 700px;
+    border-radius: 7px;
+    box-shadow: 5px 5px 20px black;
+}
+
+    .login-box .title {
+        font-size: 24px;
+        text-align: center;
+        padding: 15px 0;
+    }
+
+    .login-box .subtitle {
+        font-size: 18px;
+        text-align: left;
+        padding: 15px 0;
+        padding-bottom: 0;
+    }
+
+        .login-box .subtitle .data {
+            font-size: 16px;
+            text-align: left;
+            padding: 5px 0;
+            padding-left: 10px;
+        }
+
+    .login-box button {
+        display: block;
+        width: 100%;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        border-left: 2px solid #03e9f4;
+        padding: 15px 0;
+        font-size: 16px;
+        color: #fff;
+        background: #396afc;
+        background: linear-gradient(to right, #2948ff, #396afc);
+        margin-top: 30px;
+        cursor: pointer;
+    }

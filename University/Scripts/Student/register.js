@@ -177,7 +177,7 @@ function validateSubjects() {
     }
     if (hasDuplicates(subjects)) {
         toastr.info("Duplicate Subjects added");
-        return false; //"Duplicate Subject selected";
+        return false; 
     }
     return true;
 }
@@ -185,7 +185,8 @@ function validateDateOfBirth() {
     var dob = $("#dob");
     if (!dob.val()) {
         dob.addClass("invalid");
-        return false; // "No dob inserted";
+        toastr.info("No dob inserted");
+        return false; 
     }
     if (dob.hasClass("invalid")) {
         dob.removeClass("invalid")
@@ -213,7 +214,8 @@ function validateFirstName() {
     var name = $("#firstname");
     if (name.val().length == 0 || name.val().length > maxNameLength) {
         name.addClass("invalid");
-        return false; //"Name is invalid";
+        toastr.info("Name is invalid");
+        return false; 
     }
     if (name.hasClass("invalid")) {
         name.removeClass("invalid")
@@ -224,6 +226,7 @@ function validateLastName() {
     var lastname = $("#lastname");
     if (lastname.val().length == 0 || lastname.val().length > maxNameLength) {
         lastname.addClass("invalid");
+        toastr.info("Last Name is invalid");
         return false;
     }
     if (lastname.hasClass("invalid")) {
@@ -235,6 +238,7 @@ function validateGuardianName() {
     var guardianname = $("#guardianname");
     if (guardianname.val().length == 0 || guardianname.val().length > maxNameLength) {
         guardianname.addClass("invalid");
+        toastr.info("Guardian Name is invalid");
         return false;
     }
     if (guardianname.hasClass("invalid")) {
@@ -247,7 +251,8 @@ function validateNID() {
     var nid = $("#nid");
     if (nid.val().length != nidLength) {
         nid.addClass("invalid");
-        return false; //"NID is invalid";
+        toastr.info("NID is invalid");
+        return false;
     }
     if (nid.hasClass("invalid")) {
         nid.removeClass("invalid");
@@ -261,7 +266,8 @@ function validatePhoneNumber(){
     var phoneNumberRegExp = new RegExp(phoneNumberPattern);
     if (!phoneNumberRegExp.test(phonenumber.val())) {
         phonenumber.addClass("invalid");
-        return false; //"Phone Number is invalid";
+        toastr.info("Phone Number is invalid");
+        return false;
     }
     if (phonenumber.hasClass("invalid")) {
         phonenumber.removeClass("invalid");

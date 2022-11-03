@@ -70,6 +70,7 @@ namespace University.Controllers
                     logger.Info("redirecting User");
                     return Json(new { url = Url.Action("../User/Login") });
                 }
+                logger.Info("User no Registered");
                 return Json(new { error = "Not Registered" });
                 
             }

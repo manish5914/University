@@ -18,7 +18,7 @@
         })
     }
     else {
-        toast.error("Incorrect inputs")
+        toastr.error("Incorrect inputs")
     }
 }
 function loginUserAjax(user) {

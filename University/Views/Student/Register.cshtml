@@ -3,66 +3,79 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Student</title>
-    <link rel="stylesheet" href="~/Content/register.css">
+    @*<link rel="stylesheet" href="~/Content/register.css">*@
     <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="~/Scripts/Student/register.js" type="text/javascript"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
+    <link rel="stylesheet" href="~/Content/Student/register.css" />
 </head>
-    <body onload="addSubject()">
-        <div id="header">Register Student</div>
-            <form>
-                <div id="form" onsubmit="validate()">
-                    <div id="name" class="section">
-                        <div class="sectionheader">Name</div>
-                        <div class="inputsection">
-                            <label id="firstnamelabel" class="formlabel" for="firstname">Name</label>
-                            <input id="firstname" class="input" name="firstname" placeholder="Enter Name" onfocusout="validateFirstName()" required />
-                        </div>
-                        <div class="inputsection">
-                            <label id="lastnamelabel" class="formlabel" for="lastname">Surname</label>
-                            <input id="lastname" class="input" name="lastname" placeholder="Enter Surname" onfocusout="validateLastName()" required />
-                        </div>
+<body onload="addSubject()">
+
+    <form class="login-box">
+        <div class="title">
+            <h2>Register Student</h2>
+        </div>
+
+        <div id="form" onsubmit="validate()">
+            <div id="name" class="section">
+                <div class="sectionheader subtitle">Name</div>
+                <div>
+                    <div class="inputsection  input-box">
+
+                        <input id="firstname" class="input" name="firstname" onfocusout="validateFirstName()" required />
+                        <label id="firstnamelabel" class="formlabel" for="firstname">Name</label>
                     </div>
-                    <div id="details" class="section">
-                        <div class="sectionheader">Details</div>
-                        <div class="inputsection">
-                            <label id="nidlabel" class="formlabel" for="nid">NID</label>
-                            <input id="nid" class="input" name="nid" placeholder="Enter NID" onfocusout="validateNID()" required />
-                        </div>
-                        <div class="inputsection">
-                            <label id="doblabel" class="formlabel" for="dob">Date of Birth</label>
-                            <input id="dob" name="dob" class="input" onfocusout="validateDateOfBirth()" type="date" />
-                        </div>
-                    </div>
-                    <div id="contactdetails" class="section">
-                        <div class="sectionheader">Contact Information</div>
-                        <div class="inputsection">
-                            <label id="emaillabel" class="formlabel" for="email">Email</label>
-                            <input id="email" class="input" name="email" placeholder="Enter Email" onfocusout="validateEmail()" required />
-                        </div>                        
-                        <div class="inputsection">
-                            <label id="phonenumberlabel" class="formlabel" for="phonenumber">Phone Number</label>
-                            <input id="phonenumber" class="input" name="phonenumber" placeholder="Enter Phone Number" onfocusout="validatePhoneNumber()" required />
-                        </div>                        
-                        <div class="inputsection">
-                            <label id="guardiannamelabel" class="formlabel" for="guardianname">Guardian Name</label>
-                            <input id="guardianname" class="input" name="guardianname" placeholder="Enter Guardian Name" onfocusout="validateGuardianName()" required />
-                        </div>                        
-                    </div>
-                    <div id="results" class="section">
-                        <div class="sectionheader">Results</div>
-                        <span>
-                            <input type="button" onclick="addSubject()" value="Add" />
-                            <input type="button" onclick="removeSubject()" value="Remove" />
-                        </span>
-                        <div id="resultsinput"></div>
-                    </div>   
-                    <div id="submit-section">
-                        <input id="registerbutton" type="button" onclick="registerStudent()" value="Register" />
+                    <div class="inputsection input-box">
+
+                        <input id="lastname" class="input" name="lastname" onfocusout="validateLastName()" required />
+                        <label id="lastnamelabel" class="formlabel" for="lastname">Surname</label>
                     </div>
                 </div>
-            </form>
-    </body>
+            </div>
+            <div id="details" class="section ">
+                <div class="sectionheader subtitle">Details</div>
+                <div class="inputsection input-box">
+
+                    <input id="nid" class="input" name="nid" onfocusout="validateNID()" required />
+                    <label id="nidlabel" class="formlabel" for="nid">NID</label>
+                </div>
+                <div class="inputsection input-box ">
+
+                    <input id="dob" name="dob" class="input" onfocusout="validateDateOfBirth()" type="date" />
+                    <label id="doblabel" class="formlabel" for="dob">Date of Birth</label>
+                </div>
+            </div>
+            <div id="contactdetails" class="section">
+                <div class="sectionheader subtitle">Contact Information</div>
+                <div class="inputsection input-box">
+
+                    <input id="email" class="input" name="email" onfocusout="validateEmail()" required />
+                    <label id="emaillabel" class="formlabel" for="email">Email</label>
+                </div>
+                <div class="inputsection input-box">
+
+                    <input id="phonenumber" class="input" name="phonenumber" onfocusout="validatePhoneNumber()" required />
+                    <label id="phonenumberlabel" class="formlabel" for="phonenumber">Phone Number</label>
+                </div>
+                <div class="inputsection input-box">
+
+                    <input id="guardianname" class="input" name="guardianname" onfocusout="validateGuardianName()" required />
+                    <label id="guardiannamelabel" class="formlabel" for="guardianname">Guardian Name</label>
+                </div>
+            </div>
+            <div id="results" class="section ">
+                <div class="sectionheader input-box subtitle">Results</div>
+                <div class=" options">
+                    <button type="button" onclick="addSubject()" value="Add">Add</button>
+                    <button type="button" onclick="removeSubject()" value="Remove">Remove</button>
+                </div>
+                <div id="resultsinput"></div>
+            </div>
+            <div id="submit-section">
+                <button id="registerbutton" type="button" onclick="registerStudent()" value="Register">Register</button>
+            </div>
+        </div>
+    </form>
+</body>
 </html>
