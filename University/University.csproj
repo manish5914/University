@@ -229,6 +229,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Student\register.js" />
+    <Content Include="Scripts\User\admin.js" />
     <Content Include="Scripts\User\login.js" />
     <Content Include="Scripts\User\register.js" />
     <Content Include="Web.config" />

@@ -82,7 +82,13 @@ namespace University.Controllers
         [HttpPost]
         public JsonResult ApproveStudents(ApprovedStudents student)
         {
-            Logger.LogError("Hello");
+            if (Session["CurrentUser"] == null)
+            {
+                return Json(new { error = "Not Logged in" });
+            }
+            if ((int)Session["CurrentUserRole"] != (int) Roles.Admin) {
+                return Json(new { error = "Not currently signed in as Admin" });
+            }
             if(_userBL.ApproveStudents(student.Students) == UniversityConstants.rowAffectedZero)
             {
                 return Json(new { error = "An Error Occured" });

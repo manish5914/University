@@ -59,7 +59,7 @@ namespace University.Controllers
                 }
                 student.UserId = (int) Session["CurrentUserId"];
                 _studentBL.Add(student);
-                return Json(new { url = Url.Action("Details") });
+                return Json(new { url = Url.Action("../User/Login") });
                 
             }
             else

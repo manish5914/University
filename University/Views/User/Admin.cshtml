@@ -3,132 +3,23 @@
 <head>
     <title>Welcome Page</title>
     <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
-    <script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
-        function getCurrentUser() {
-            return new Promise((resolve, reject) => {
-                $.ajax({
-                    type: "GET",
-                    url: "/User/GetCurrentUser",
-                    datatype: "json",
-                    success: function (data) {
-                        resolve(data);
-                    },
-                    error: function () {
-                        reject("No user received");
-                    }
-                });
-            });
-        }
-        function start() {
-            getCurrentUser().then((response) => {
-                if (response) {
-                    if (response.currentUser != null) {
-                        $("#userName").text("Your are logged in as " + response.currentUser + " with User Id: " + response.currentUserId + " as Role: " + response.currentUserRole);
-                    }
-                    else {
-                        console.log("No user received");
-                    }
-                }
-            }).catch((error) => {
-                console.log(error);
-            })
-        }
-        function getStudents() {
-            return new Promise((resolve, reject) => {
-                $.ajax({
-                    type: "GET",
-                    url: "/User/GetStudents",
-                    datatype: "json",
-                    success: function (data) {
-                        if (data != null) {
-                            resolve(JSON.parse(data));
-                        }
-                    },
-                    error: function (error) {
-                        reject("No Students");
-                    }
-                });
-            });
-        }
-        const rejectedGrade = 10;
-        const numberOfSeats = 15;
-        let approvedStudent = [];
-        let topStudentCounter = 0;
-        function fillTables() { 
-            getStudents().then((response) => {
-                if (response) {
-                    $.each(response, function (key, value) {
-                        let studentDetail = value;
-                        let studentRow = document.createElement("tr");
-                        let studentId;
-                        $.each(Object.keys(studentDetail), function (key, value) {
-                            studentId = studentDetail["studentid"];
-                            var studentData = document.createElement("td");
-                            if (value == "TotalGrade" && studentDetail[value] < rejectedGrade) {
-                                studentRow.className = "rejectedStudent";
-                            }
-
-                            studentData.textContent = studentDetail[value];
-                            studentRow.append(studentData);
-
-                        });
-                        if (topStudentCounter < numberOfSeats) {
-                            approvedStudent.push(studentId)
-                            topStudentCounter++;
-                            studentRow.className = "approvedStudent";
-                        }
-                        $("#student-table").append(studentRow);
-                    });
-                }
-                console.log(approvedStudent);
-            }).catch((error) => {   
-                console.log(error);
-            });
-        }
-        function approveStudents() {
-            let approvedStudents = {};
-            approvedStudents.Students = approvedStudent;
-            return new Promise((resolve, reject) => {
-                $.ajax({
-                    type: "POST",
-                    url: "/User/ApproveStudents",
-                    data: approvedStudents,
-                    success: function (data) {
-                        if (data.success != null) {
-                            resolve(data.success);
-                        }
-                        if (data.error != null) {
-                            reject(data.error);
-                        }
-                    }, error: function () {
-                        reject("An Error occured");
-                    }
-                })
-            })
-        };
-        function adminApprove() {
-            approveStudents().then((response) => {
-                toastr.info(response);
-            }).catch((reject) => {
-                toastr.error(reject)
-            });
-        }
-        function register() {
-            toastr.info('Page Under construction!!');
-        }
-    </script>
     <style>
-        #student-table, td, tr{
+        #student-table, td, tr {
             border: 1px solid black;
         }
-        .rejectedStudent{
+
+        .rejectedStudent {
             background-color: red;
         }
-        .approvedStudent{
+
+        .approvedStudent {
             background-color: lightgreen;
         }
     </style>
+    <script src="~/Scripts/User/admin.js" type="text/javascript"></script>
 </head>
 <body onload="start()">
     <h2>Admin Page</h2>
@@ -138,7 +29,9 @@
     <a href="/User/Login">User Login</a>
     <button onclick="getStudents()">GetStudents</button>
     <button onclick="fillTables()">fillTables</button>
-    <button onclick="adminApprove()">register()</button>
+    <button onclick="adminApprove()">Approve</button>
+    <button id="downloadcsv"onclick="downloadCSV()">Download</button>
+    <div id="csv"></div>
     <table id="student-table">
         <tr>
             <th>StudentID</th>
@@ -151,7 +44,10 @@
             <th>Guardian Name</th>
             <th>User ID</th>
             <th>Status</th>
-        </tr>     
+        </tr>
+        <tbody id="table-rows">
+
+        </tbody>
     </table>
 </body>
 </html>
