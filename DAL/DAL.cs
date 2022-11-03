@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Diagnostics;
 using System.ComponentModel;
-using Serilog;
+using NLog;
+using NLog.Targets.Wrappers;
 
 namespace DataAccessLayer
 {
     public static class DAL
     {
+        private static Logger logger = LogManager.GetLogger("myLoggerRule");
         public static int InsertUpdateData(string query, List<SqlParameter> parameters)
         {
             try
@@ -34,11 +36,12 @@ namespace DataAccessLayer
                     rowAffected = cmd.ExecuteNonQuery();
                 }
                 dbconnection.CloseConnection();
+                logger.Info("Inserted/ Updated Data");
                 return rowAffected;
             }
             catch (Exception exception)
-            {                
-                Debug.WriteLine(exception.Message);
+            {
+                logger.Error(exception.Message);
                 return UniversityConstants.rowAffectedZero;  
             }
         }
@@ -57,11 +60,12 @@ namespace DataAccessLayer
                         sda.Fill(dt);
                     }
                 }
+                logger.Info("Got Data" + query);
                 dbconnection.CloseConnection();
                 return dt;
             }catch(Exception exception)
             {
-                Debug.WriteLine(exception);
+                logger.Error(exception.Message);
                 return null;
             }
         }
@@ -85,12 +89,13 @@ namespace DataAccessLayer
                     sda.Fill(dt);
                     
                 }
+                logger.Info("Got data for Parameter");
                 dbconnection.CloseConnection();
                 return dt;
             }
             catch (Exception exception)
             {
-                Debug.WriteLine(exception);
+                logger.Error(exception.Message);
                 return null;
             }
         }

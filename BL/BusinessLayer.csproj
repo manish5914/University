@@ -71,8 +71,11 @@
     <PackageReference Include="NLog">
       <Version>5.0.5</Version>
     </PackageReference>
-    <PackageReference Include="Serilog.Extensions.Logging">
-      <Version>3.1.0</Version>
+    <PackageReference Include="NLog.Config">
+      <Version>4.7.15</Version>
+    </PackageReference>
+    <PackageReference Include="NLog.Schema">
+      <Version>5.0.5</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>6.0.6</Version>

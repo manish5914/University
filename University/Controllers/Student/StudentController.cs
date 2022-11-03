@@ -17,12 +17,14 @@ using System.Text.Json;
 using System.Web.ModelBinding;
 using ModelState = System.Web.Mvc.ModelState;
 using ModelError = System.Web.Mvc.ModelError;
+using NLog;
 
 namespace University.Controllers
 {
     public class StudentController : Controller
     {
         private readonly IStudentBL _studentBL;
+        private static Logger logger = LogManager.GetLogger("myLoggerRule");
         public StudentController(IStudentBL studentBL)
         {
             _studentBL = studentBL;
@@ -40,11 +42,13 @@ namespace University.Controllers
         [HttpPost]
         public ActionResult GetSubjects()
         {
+            logger.Info("Got Subjects");
             return Json(_studentBL.GetSubjects());
         }
         [HttpPost]
         public ActionResult GetGrades()
         {
+            logger.Info("Got Grades");
             return (Json(_studentBL.GetGrades()));
         }
         [HttpPost]
@@ -55,8 +59,11 @@ namespace University.Controllers
             {
                 if (Session["currentUserId"] == null)
                 {
+
+                    logger.Error("Not Currently Logged in..");
                     return Json(new { error = "Not Currently Logged in.." });
                 }
+                logger.Info("Register Student");
                 student.UserId = (int) Session["CurrentUserId"];
                 _studentBL.Add(student);
                 return Json(new { url = Url.Action("../User/Login") });
@@ -68,7 +75,7 @@ namespace University.Controllers
                 {
                     foreach (ModelError error in modelState.Errors)
                     {
-                        Debug.WriteLine(error.ErrorMessage.ToString());
+                        logger.Error(error.ErrorMessage.ToString());
                     }
                 }
                 return Json(new { error = "Student not registered" });
