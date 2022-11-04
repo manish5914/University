@@ -60,7 +60,7 @@ namespace DataAccessLayer
                         sda.Fill(dt);
                     }
                 }
-                logger.Info("Got Data" + query);
+                logger.Info("Got Data");
                 dbconnection.CloseConnection();
                 return dt;
             }catch(Exception exception)
