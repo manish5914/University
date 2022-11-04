@@ -14,6 +14,7 @@ function getCurrentUser() {
         });
     });
 }
+var currentUserRole = 0;
 function start() {
     document.getElementById("downloadcsv")
         .addEventListener("click", function () {
@@ -29,6 +30,7 @@ function start() {
         if (response) {
             if (response.currentUser != null) {
                 $("#userName").text("Your are logged in as " + response.currentUser + " with User Id: " + response.currentUserId + " as Role: " + response.currentUserRole);
+                currentUserRole = response.currentUserRole;
             }
             else {
                 toastr.error("No user received");
@@ -122,7 +124,7 @@ function adminApprove() {
 }
 function downloadCSV(file, text) {
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8, ' + encodeURIComponent(text));
+    element.setAttribute('href', 'data:text/csv;charset=utf-8, ' + encodeURIComponent(text));
     element.setAttribute('download', file);
     $("#csv").append(element);
     element.click();
