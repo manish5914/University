@@ -277,3 +277,7 @@ function validatePhoneNumber(){
 function hasDuplicates(array) {
     return (new Set(array)).size !== array.length;
 }
+function cancel() {
+    toastr.info("Cancelling Registration");
+    window.location.href = "/User/Login";
+}

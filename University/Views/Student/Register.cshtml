@@ -18,34 +18,37 @@
         </div>
 
         <div id="form" onsubmit="validate()">
-            <div id="name" class="section">
-                <div class="sectionheader subtitle">Name</div>
-                <div>
-                    <div class="inputsection  input-box">
+            <div id="top-section">
+                <div id="name" class="section">
+                    <div class="sectionheader subtitle">Name</div>
+                    <div>
+                        <div class="inputsection  input-box">
 
-                        <input id="firstname" class="input" name="firstname" onfocusout="validateFirstName()" required />
-                        <label id="firstnamelabel" class="formlabel" for="firstname">Name</label>
+                            <input id="firstname" class="input" name="firstname" onfocusout="validateFirstName()" required />
+                            <label id="firstnamelabel" class="formlabel" for="firstname">Name</label>
+                        </div>
+                        <div class="inputsection input-box">
+
+                            <input id="lastname" class="input" name="lastname" onfocusout="validateLastName()" required />
+                            <label id="lastnamelabel" class="formlabel" for="lastname">Surname</label>
+                        </div>
                     </div>
+                </div>
+                <div id="details" class="section ">
+                    <div class="sectionheader subtitle">Details</div>
                     <div class="inputsection input-box">
 
-                        <input id="lastname" class="input" name="lastname" onfocusout="validateLastName()" required />
-                        <label id="lastnamelabel" class="formlabel" for="lastname">Surname</label>
+                        <input id="nid" class="input" name="nid" onfocusout="validateNID()" required />
+                        <label id="nidlabel" class="formlabel" for="nid">NID</label>
+                    </div>
+                    <div class="inputsection input-box ">
+
+                        <input id="dob" name="dob" class="input" onfocusout="validateDateOfBirth()" type="date" />
+                        <label id="doblabel" class="formlabel" for="dob">Date of Birth</label>
                     </div>
                 </div>
             </div>
-            <div id="details" class="section ">
-                <div class="sectionheader subtitle">Details</div>
-                <div class="inputsection input-box">
-
-                    <input id="nid" class="input" name="nid" onfocusout="validateNID()" required />
-                    <label id="nidlabel" class="formlabel" for="nid">NID</label>
-                </div>
-                <div class="inputsection input-box ">
-
-                    <input id="dob" name="dob" class="input" onfocusout="validateDateOfBirth()" type="date" />
-                    <label id="doblabel" class="formlabel" for="dob">Date of Birth</label>
-                </div>
-            </div>
+            
             <div id="contactdetails" class="section">
                 <div class="sectionheader subtitle">Contact Information</div>
                 <div class="inputsection input-box">
@@ -67,13 +70,14 @@
             <div id="results" class="section ">
                 <div class="sectionheader input-box subtitle">Results</div>
                 <div class=" options">
-                    <button type="button" onclick="addSubject()" value="Add">Add</button>
-                    <button type="button" onclick="removeSubject()" value="Remove">Remove</button>
+                    <button id="add-subject" type="button" onclick="addSubject()" value="Add">Add</button>
+                    <button id="remove-subject" type="button" onclick="removeSubject()" value="Remove">Remove</button>
                 </div>
                 <div id="resultsinput"></div>
             </div>
             <div id="submit-section">
                 <button id="registerbutton" type="button" onclick="registerStudent()" value="Register">Register</button>
+                <button id="cancel-register" type="button" onclick="cancel()" value="Cancel">Cancel</button>
             </div>
         </div>
     </form>

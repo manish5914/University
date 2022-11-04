@@ -126,3 +126,8 @@ box-shadow: 5px 5px 20px black;
     color: white;
 
 }
+
+#scrollable-table{
+    overflow-x: auto;
+    overflow-y: hidden;
+}
