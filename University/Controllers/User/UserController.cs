@@ -116,6 +116,7 @@ namespace University.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
+            Session.Abandon();
             return Json(new { url = Url.Action("") }, JsonRequestBehavior.AllowGet);
         }
     }
