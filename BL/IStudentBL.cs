@@ -8,5 +8,6 @@ namespace BusinessLayer
         string GetSubjects();
         string GetGrades();
         Student GetStudent(Student student);
+        string DetermineStatus(char[] results);
     }
 }

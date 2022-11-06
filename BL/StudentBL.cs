@@ -22,11 +22,11 @@ namespace BusinessLayer
             student.Status = DetermineStatus(student.Grades);
             return _studentDAL.AddStudent(student);
         }
-        private string DetermineStatus(char[] results)
+        public string DetermineStatus(char[] results)
         {
             int totalGrade = 0;
             Dictionary<char, int> grades = new Dictionary<char, int>();
-            DataTable gradeDT = DAL.GetData(SqlCommands.GetGrades);
+            DataTable gradeDT = _studentDAL.GetGrades();
             foreach (DataRow dr in gradeDT.Rows)
             {
                 grades.Add(Convert.ToChar(dr[0]), Convert.ToInt32(dr[1]));

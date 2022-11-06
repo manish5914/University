@@ -29,8 +29,6 @@ namespace University.Controllers
         {
             _studentBL = studentBL;
         }
-
-        
         public ActionResult Index()
         {
             return View();
@@ -54,7 +52,6 @@ namespace University.Controllers
         [HttpPost]
         public ActionResult Register(Student student)
         {
-           
             if (ModelState.IsValid)
             {
                 if (Session["currentUserId"] == null)
@@ -71,8 +68,7 @@ namespace University.Controllers
                     return Json(new { url = Url.Action("../User/Login") });
                 }
                 logger.Info("User no Registered");
-                return Json(new { error = "Not Registered" });
-                
+                return Json(new { error = "Not Registered" });  
             }
             else
             {

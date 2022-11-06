@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace BusinessLayer
 {
-    internal class Encryption
+    public class Encryption
     {
         public static string GetRandomSalt()
         {

@@ -71,7 +71,7 @@ namespace BusinessLayer
             {
                 return "Admin";
             }
-            else if (user.RoleId == (int)Roles.User)
+            if (user.RoleId == (int)Roles.User)
             {
                 if (_userDAL.GetStudentCountByUserId(user) == 0)
                 {
@@ -79,10 +79,7 @@ namespace BusinessLayer
                 }
                 return "../Student/Detail";
             }
-            else
-            {
-                return "Login";
-            }
+            return "Login";
         }
     }
 }
