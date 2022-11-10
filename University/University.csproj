@@ -231,6 +231,7 @@
     <Content Include="Scripts\User\admin.js" />
     <Content Include="Scripts\User\login.js" />
     <Content Include="Scripts\User\register.js" />
+    <Content Include="Scripts\testDojo\testScript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -253,6 +254,7 @@
     </Content>
     <Content Include="Views\Student\Detail.cshtml" />
     <Content Include="Views\User\Admin.cshtml" />
+    <Content Include="Views\User\TestDojo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

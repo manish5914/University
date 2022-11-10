@@ -119,5 +119,9 @@ namespace University.Controllers
             Session.Abandon();
             return Json(new { url = Url.Action("") }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult TestDojo()
+        {
+            return View();
+        }
     }
 }
