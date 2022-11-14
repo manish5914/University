@@ -29,7 +29,7 @@ namespace University.Controllers
         {
             _studentBL = studentBL;
         }
-        public ActionResult Index()
+        public ActionResult DetailDojo()
         {
             return View();
         }

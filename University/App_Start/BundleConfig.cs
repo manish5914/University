@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Optimization;
 
 namespace University
@@ -26,6 +27,8 @@ namespace University
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/registerstudent.css"));
+            bundles.Add(new ScriptBundle("~/bundles/script").Include("~/appScript/detailDojo.js"));
+            
         }
     }
 }

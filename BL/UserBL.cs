@@ -65,7 +65,7 @@ namespace BusinessLayer
         {
             if (user == null)
             {
-                return "Login";
+                return "TestDojo";
             }
             if (user.RoleId == (int)Roles.Admin)
             {
@@ -77,9 +77,9 @@ namespace BusinessLayer
                 {
                     return "../Student/Register";
                 }
-                return "../Student/Detail";
+                return "../Student/DetailDojo";
             }
-            return "Login";
+            return "TestDojo";
         }
     }
 }

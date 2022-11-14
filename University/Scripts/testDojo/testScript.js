@@ -1,4 +1,4 @@
-﻿define(["dojo/dom", "dojo/on", "dojo/ready", "dojo/request"],
+﻿require(["dojo/dom", "dojo/on", "dojo/ready", "dojo/request"],
     function (dom, on, ready, request) {
         var form = dom.byId("form");
         var emailElem = dom.byId("email");
@@ -16,7 +16,7 @@
                     data: {
                         Email: email,
                         Password: password
-                    }
+                    }, handleAs:"json"
                 }).then(
                     function (response) {
                         if (response.url) {

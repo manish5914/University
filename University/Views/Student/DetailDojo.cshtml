@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details</title>
+    <script type="text/javascript">
+        var dojoConfig = {
+            async: true,
+            packages: [{
+                name: "Scripts",
+                location: "@Url.Content("~/Scripts")"
+            }]
+        }
+    </script>
+    <link rel="stylesheet" href="~/Content/User/user.css" />
+    <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+    <script src="~/Scripts/Student/detail.js"></script>
+</head>
+<body>
+    <form id="form-detail" class="main-box" dojoType="dijit.form.Form">
+        <div class="title">
+            <h1>Student Details</h1>
+        </div>
+        <div class="subtitle">
+            <div>Status</div>
+            <div class="data" id="status"></div>
+        </div>
+        <div class="input-box">
+            <div>Name</div>
+            <div class="data" id="name"></div>
+            <input data-dojo-type=”dijit/form/TextBox” id="name-form" class="input" />
+        </div>
+        <div class="input-box">
+            <div>Nid</div>
+            <div class="data" id="nid"></div>
+            <input data-dojo-type=”dijit/form/TextBox” id="nid-form" class="input" />
+        </div>
+        <div class="input-box">
+            <div>Guardian</div>
+            <div class="data" id="guardianname"></div>
+            <input data-dojo-type=”dijit/form/TextBox” id="guardian-form" class="input" />
+        </div>
+        <div class="input-box">
+            <div>Email</div>
+            <div class="data" id="email"></div>
+            <input data-dojo-type=”dijit/form/TextBox” id="email-form" class="input" />
+        </div>
+        <div class="input-box">
+            <div>Phone Number</div>
+            <div class="data" id="phonenumber"></div>
+            <input data-dojo-type=”dijit/form/TextBox” id="phone-form" class="input" />
+        </div>
+        <button id="edit">Edit Details</button>
+        <button>Save Details</button>
+        <button onclick="Logout()">Logout</button>
+       
+    </form>
+    <script type="text/javascript">
+        require(["Scripts/testDojo/appScript/detailsDojo"], function () { });
+    </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.4.8.4\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.4.8.4\build\Microsoft.TypeScript.MSBuild.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -34,6 +35,19 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -228,6 +242,10 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Student\detail.js" />
     <Content Include="Scripts\Student\register.js" />
+    <Content Include="Scripts\testDojo\appScript\detailsDojo.js" />
+    <Content Include="Scripts\testDojo\tsconfig.json" />
+    <Content Include="Scripts\testDojo\appScript\detailsDojo.js.map" />
+    <TypeScriptCompile Include="Scripts\testDojo\detailsDojo.ts" />
     <Content Include="Scripts\User\admin.js" />
     <Content Include="Scripts\User\login.js" />
     <Content Include="Scripts\User\register.js" />
@@ -255,6 +273,73 @@
     <Content Include="Views\Student\Detail.cshtml" />
     <Content Include="Views\User\Admin.cshtml" />
     <Content Include="Views\User\TestDojo.cshtml" />
+    <Content Include="Views\Student\DetailDojo.cshtml" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dijit.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\doh.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojo.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.analytics.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.app.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.atom.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.av.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.calc.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.calendar.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.charting.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.collections.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.color.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.css3.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.data.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.date.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.dgauges.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.dnd.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.drawing.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.dtl.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.editor.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.embed.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.encoding.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.flash.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.form.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.fx.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.gantt.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.gauges.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.geo.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.gesture.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.gfx.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.gfx3d.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.grid.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.help.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.highlight.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.html.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.image.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.io.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.jq.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.json.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.jsonPath.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.lang.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.layout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.main.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.math.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.mdnd.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.mobile.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.mvc.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.NodeList.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.rails.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.robot.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.rpc.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.secure.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.sketch.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.socket.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.sql.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.storage.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.string.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.testing.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.timing.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.treemap.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.uuid.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.validate.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.widget.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\dojo\dojox.xml.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\toastr\toastr.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,6 +366,9 @@
       <Project>{f4744af1-8d06-46e3-8da2-1aefbb8e7826}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -317,9 +405,12 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.6\build\System.Text.Json.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.2\build\Microsoft.Extensions.Logging.Abstractions.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.2\build\Microsoft.Extensions.Logging.Abstractions.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.4.8.4\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.4.8.4\build\Microsoft.TypeScript.MSBuild.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.4.8.4\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.4.8.4\build\Microsoft.TypeScript.MSBuild.targets'))" />
   </Target>
   <Import Project="..\packages\System.Text.Json.6.0.6\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.6\build\System.Text.Json.targets')" />
   <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.2\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.2\build\Microsoft.Extensions.Logging.Abstractions.targets')" />
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.4.8.4\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.4.8.4\build\Microsoft.TypeScript.MSBuild.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

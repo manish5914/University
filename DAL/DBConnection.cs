@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
+using NLog;
 
 namespace DataAccessLayer
 {
@@ -11,6 +12,8 @@ namespace DataAccessLayer
 
     public class DBConnection : IDBConnection
     {
+
+        private static Logger logger = LogManager.GetLogger("myLoggerRule");
         string dbconnection = ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
         public SqlConnection connection { get; set; }
 
@@ -23,18 +26,32 @@ namespace DataAccessLayer
         }
         public void OpenConnection()
         {
-            if(connection.State == System.Data.ConnectionState.Open)
+            try
             {
-                connection.Close();
+                if(connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+                connection.Open();
+            }catch(Exception execption)
+            {
+                logger.Error(execption.Message);
             }
-            connection.Open();
+           
         }
         public void CloseConnection()
         {
-            if(connection != null && connection.State == System.Data.ConnectionState.Open)
+            try
             {
-                connection.Close();
-                connection.Dispose();
+                if(connection != null && connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                    connection.Dispose();
+                }
+            }
+            catch(Exception exception)
+            {
+                logger.Error(exception.Message);
             }
         }
     }
