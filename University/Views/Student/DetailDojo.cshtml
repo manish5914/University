@@ -16,7 +16,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
-    <script src="~/Scripts/Student/detail.js"></script>
+    <script type="module" src="~/Scripts/testDojo/appScript/detailsDojo.js"></script>
 </head>
 <body>
     <form id="form-detail" class="main-box" dojoType="dijit.form.Form">
@@ -57,8 +57,8 @@
         <button onclick="Logout()">Logout</button>
        
     </form>
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         require(["Scripts/testDojo/appScript/detailsDojo"], function () { });
-    </script>
+    </script>*@
 </body>
 </html>

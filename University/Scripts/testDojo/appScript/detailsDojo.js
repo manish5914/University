@@ -1,21 +1,20 @@
-"use strict";
-//require(["dojo/dom", "dojo/on",  "dojo/request", "dijit/registry", "dojo/domReady", "dijit/form/TextBox"],
+//require(["dojo/dom", "dojo/on",  "dojo/request", "dijit/registry", "dojo/domReady", "dijit/form/TextBox"], 
 /// <reference path="../typings/dojo/dojo.d.ts" />
 /// <reference path ="../typings/toastr/toastr.d.ts" />
-Object.defineProperty(exports, "__esModule", { value: true });
-var dom = require("dojo/dom");
-var on = require("dojo/on");
-var toastr = require("toastr");
-on(dom.byId("edit"), "click", function (event) {
-    if (event.submitter.matches("#edit")) {
-        event.preventDefault();
+define(["require", "exports", "dojo/dom", "dojo/on", "toastr"], function (require, exports, dom, on, toastr) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    on(dom.byId("edit"), "click", function (event) {
+        if (event.submitter.matches("#edit")) {
+            event.preventDefault();
+        }
+        console.log("clicked");
+        testToastr();
+    });
+    function testToastr() {
+        toastr.info("toastr appeared");
     }
-    console.log("clicked");
-    testToastr();
 });
-function testToastr() {
-    toastr.info("toastr appeared");
-}
 //    function (dom, on, request) {
 //        on(dom.byId("edit"), "click", function () {
 //            console.log("click");

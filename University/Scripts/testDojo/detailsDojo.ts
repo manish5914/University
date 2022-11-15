@@ -1,11 +1,9 @@
-﻿//require(["dojo/dom", "dojo/on",  "dojo/request", "dijit/registry", "dojo/domReady", "dijit/form/TextBox"],
+﻿//require(["dojo/dom", "dojo/on",  "dojo/request", "dijit/registry", "dojo/domReady", "dijit/form/TextBox"], 
 /// <reference path="../typings/dojo/dojo.d.ts" />
 /// <reference path ="../typings/toastr/toastr.d.ts" />
 
 import * as dom from "dojo/dom";
 import * as on from "dojo/on";
-import * as request from "dojo/request";
-import * as ready from "dojo/ready";
 import * as toastr from "toastr";
 
 on(dom.byId("edit"), "click", function (event) {

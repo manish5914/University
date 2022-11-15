@@ -4,12 +4,14 @@
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
+    "module":  "amd",
     "sourceMap": true,
     "target": "es5",
     "outDir": "appScript/"
   },
   "include": [
     "*.*"
+
   ],
   "exclude": [
     "node_modules",
