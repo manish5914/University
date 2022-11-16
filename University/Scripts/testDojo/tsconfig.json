@@ -4,14 +4,21 @@
     "noImplicitAny": false,
     "noEmitOnError": true,
     "removeComments": false,
-    "module":  "amd",
+    "module": "amd",
     "sourceMap": true,
     "target": "es5",
     "outDir": "appScript/"
   },
+  "files": [
+    "./appScript/detailsDojo.ts",
+    "../typings/dojo/dojo.d.ts",
+    "../typings/toastr/toastr.d.ts"
+  ],
   "include": [
-    "*.*"
-
+    "*.*",
+    "./appScript/detailsDojo.ts",
+    "../typings/dojo/dojo.d.ts"
+    "../typings/toastr/toastr.d.ts"
   ],
   "exclude": [
     "node_modules",

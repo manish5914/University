@@ -242,10 +242,11 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Student\detail.js" />
     <Content Include="Scripts\Student\register.js" />
+    <Content Include="Scripts\testDojo\appScript\details.js" />
     <Content Include="Scripts\testDojo\appScript\detailsDojo.js" />
     <Content Include="Scripts\testDojo\tsconfig.json" />
     <Content Include="Scripts\testDojo\appScript\detailsDojo.js.map" />
-    <TypeScriptCompile Include="Scripts\testDojo\detailsDojo.ts" />
+    <TypeScriptCompile Include="Scripts\testDojo\appScript\detailsDojo.ts" />
     <Content Include="Scripts\User\admin.js" />
     <Content Include="Scripts\User\login.js" />
     <Content Include="Scripts\User\register.js" />
@@ -274,6 +275,7 @@
     <Content Include="Views\User\Admin.cshtml" />
     <Content Include="Views\User\TestDojo.cshtml" />
     <Content Include="Views\Student\DetailDojo.cshtml" />
+    <TypeScriptCompile Include="Scripts\testDojo\appScript\dojo.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\dojo\dijit.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\dojo\doh.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\dojo\dojo.d.ts" />
