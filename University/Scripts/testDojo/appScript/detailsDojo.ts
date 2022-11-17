@@ -4,22 +4,73 @@ import * as on from "dojo/on";
 import * as request from "dojo/request";
 import * as query from "dojo/query";
 import * as nodeList from "dojo/NodeList-dom";
-import * as array from "dojo/_base/array"
+import * as array from "dojo/_base/array";
+import * as domAttr from "dojo/dom-attr";
+import * as ToggleButton from "dijit/form/ToggleButton";
 ready(new function () {
-    //console.log("ready dom");
-    //console.log(dom.byId("name"));
-    //    toastr.error("error but worked");
-    on(dom.byId("edit"), "click", function () {
-        console.log("click");
+    const disabled = "true"; 
+    function disableInputs() {
+        var inputs = query(".input");
+        inputs.forEach(function (input) {
+            input.disabled = disabled;
+        }, this);
+    }
+    function enableInputs() {
+        var inputs = query(".input");
+        inputs.forEach(function (input) {
+            domAttr.remove(input, "disabled");
+        }, this);
+    }
+    var editButton = dom.byId("edit");
+    on(editButton, "click", function () {
+        enableInputs();
+        editButton.innerHTML = "Cancel";
     })
-    const data = request.get("/Student/GetCurrentStudent", {
+    on(dom.byId("logoutButton"), "click", function () {
+        Logout();
+    });
+    function Logout() {
+        request.get("/User/Logout", {
+            handleAs: "json",
+            data: "",
+            preventCache: false,
+            query: "",
+            timeout: 0
+        }).then((...args: any[]) => {
+            var response = args[0];
+            toastr.success("Logging out...");
+            window.location = response.url;
+        }).otherwise((...args: any[]) => {
+            toastr.error(args[0]);
+        });
+    
+    }
+    new ToggleButton({
+        showLabel: true,
+        checked: false,
+        onChange: function (val) {
+            this.set('label', val);
+            if (val) {
+                enableInputs();
+                this.set('label', "Cancel");
+            }
+            else {
+                disableInputs();
+                this.set('label', "Edit Detail");
+            }
+        },
+        label: "Edit Details"
+    }, dom.byId("edit"));
+    function getValues() {
+
+    }
+    request.get("/Student/GetCurrentStudent", {
         handleAs: 'json',
         data: "",
         preventCache: false,
         query: "",
         timeout: 0
-    });
-    data.then((...args: any[]) => {
+    }).then((...args: any[]) => {
         var response = args[0];
         if (response.error) {
             toastr.error(response.error);
@@ -27,20 +78,16 @@ ready(new function () {
             return;
         }
         if (response) {
-            dom.byId("name-form").value = response["FirstName"] + " " + response["LastName"];
+            dom.byId("name-form").value = response["FirstName"];
+            dom.byId("surname-form").value = response["LastName"];
             dom.byId("nid-form").value = response["NID"];
             dom.byId("guardian-form").value = response["GuardianName"];
             dom.byId("email-form").value = response["Email"];
             dom.byId("phone-form").value = response["PhoneNumber"];
-            toggleInputs(true);
+            disableInputs();
         }
     });
-    function toggleInputs(status:boolean) {
-        var inputs = query(".input");
-        inputs.forEach(function (input) {
-            input.disabled = status;
-        }, this);
-    }
+    
 });
 
 

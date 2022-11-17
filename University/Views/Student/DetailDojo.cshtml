@@ -13,7 +13,7 @@
     </script>
     <link rel="stylesheet" href="~/Content/User/user.css" />
     <script src="~/Scripts/jquery-3.4.1.min.js" type="text/javascript"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
 </head>
@@ -30,6 +30,11 @@
             <div>Name</div>
             <div class="data" id="name"></div>
             <input data-dojo-type=”dijit/form/TextBox” id="name-form" class="input" />
+        </div>
+        <div class="input-box">
+            <div>Surname</div>
+            <div class="data" id="lastname"></div>
+            <input data-dojo-type=”dijit/form/TextBox” id="surname-form" class="input" />
         </div>
         <div class="input-box">
             <div>Nid</div>
@@ -51,10 +56,12 @@
             <div class="data" id="phonenumber"></div>
             <input data-dojo-type=”dijit/form/TextBox” id="phone-form" class="input" />
         </div>
-        <button type="button" id="edit">Edit Details</button>
-        <button >Save Details</button>
-        <button onclick="Logout()">Logout</button>
        
+        <button id="edit">Edit Details</button>
+        
+        <button>Save Details</button>
+        <button id="logoutButton">Logout</button>
+
     </form>
     <script type="text/javascript">
         require(["Scripts/testDojo/appScript/detailsDojo"], function () { });

@@ -12,13 +12,15 @@
   "files": [
     "./appScript/detailsDojo.ts",
     "../typings/dojo/dojo.d.ts",
-    "../typings/toastr/toastr.d.ts"
+    "../typings/toastr/toastr.d.ts",
+    "../typings/dojo/dijit.d.ts"
   ],
   "include": [
     "*.*",
     "./appScript/detailsDojo.ts",
-    "../typings/dojo/dojo.d.ts"
-    "../typings/toastr/toastr.d.ts"
+    "../typings/dojo/dojo.d.ts",
+    "../typings/toastr/toastr.d.ts",
+    "../typings/dojo/dijit.d.ts"
   ],
   "exclude": [
     "node_modules",
