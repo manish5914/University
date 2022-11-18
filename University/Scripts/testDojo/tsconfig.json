@@ -13,14 +13,16 @@
     "./appScript/detailsDojo.ts",
     "../typings/dojo/dojo.d.ts",
     "../typings/toastr/toastr.d.ts",
-    "../typings/dojo/dijit.d.ts"
+    "../typings/dojo/dijit.d.ts",
+    "../typings/dojo/dojox.validate.d.ts"
   ],
   "include": [
     "*.*",
     "./appScript/detailsDojo.ts",
     "../typings/dojo/dojo.d.ts",
     "../typings/toastr/toastr.d.ts",
-    "../typings/dojo/dijit.d.ts"
+    "../typings/dojo/dijit.d.ts",
+    "../typings/dojo/dojox.validate.d.ts"
   ],
   "exclude": [
     "node_modules",

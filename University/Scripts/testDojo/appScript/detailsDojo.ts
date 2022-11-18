@@ -7,6 +7,8 @@ import * as nodeList from "dojo/NodeList-dom";
 import * as array from "dojo/_base/array";
 import * as domAttr from "dojo/dom-attr";
 import * as ToggleButton from "dijit/form/ToggleButton";
+import * as validate from "dojox/validate/_base";
+
 ready(new function () {
     const disabled = "true"; 
     function disableInputs() {
@@ -62,8 +64,15 @@ ready(new function () {
         label: "Edit Details"
     }, dom.byId("edit"));
     function getValues() {
-
+        
+        return { FirstName: dom.byId("name-form").value, LastName: dom.byId("surname-form").value, NID: dom.byId("nid-form").value, GuardianName: dom.byId("guardian-form").value, Email: dom.byId("email-form").value, PhoneNumber: dom.byId("phone-form").value };
     }
+    function isNameValid() {
+        console.log(validate.isText(dom.byId("name-form").value, { minlength: 1 })); 
+    }
+    on(dom.byId("name-form"), "blur", function () {
+        isNameValid();
+    })
     request.get("/Student/GetCurrentStudent", {
         handleAs: 'json',
         data: "",
@@ -85,9 +94,9 @@ ready(new function () {
             dom.byId("email-form").value = response["Email"];
             dom.byId("phone-form").value = response["PhoneNumber"];
             disableInputs();
+
         }
     });
-    
 });
 
 

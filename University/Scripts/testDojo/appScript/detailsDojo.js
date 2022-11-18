@@ -1,4 +1,4 @@
-define(["require", "exports", "dojo/ready", "dojo/dom", "dojo/on", "dojo/request", "dojo/query", "dojo/dom-attr", "dijit/form/ToggleButton"], function (require, exports, ready, dom, on, request, query, domAttr, ToggleButton) {
+define(["require", "exports", "dojo/ready", "dojo/dom", "dojo/on", "dojo/request", "dojo/query", "dojo/dom-attr", "dijit/form/ToggleButton", "dojox/validate/_base"], function (require, exports, ready, dom, on, request, query, domAttr, ToggleButton, validate) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     ready(new function () {
@@ -63,7 +63,14 @@ define(["require", "exports", "dojo/ready", "dojo/dom", "dojo/on", "dojo/request
             label: "Edit Details"
         }, dom.byId("edit"));
         function getValues() {
+            return { FirstName: dom.byId("name-form").value, LastName: dom.byId("surname-form").value, NID: dom.byId("nid-form").value, GuardianName: dom.byId("guardian-form").value, Email: dom.byId("email-form").value, PhoneNumber: dom.byId("phone-form").value };
         }
+        function isNameValid() {
+            console.log(validate.isText(dom.byId("name-form").value, { minlength: 1 }));
+        }
+        on(dom.byId("name-form"), "blur", function () {
+            isNameValid();
+        });
         request.get("/Student/GetCurrentStudent", {
             handleAs: 'json',
             data: "",
