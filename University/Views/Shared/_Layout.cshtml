@@ -2,13 +2,25 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">*@
+    @*<title>@ViewBag.Title - My ASP.NET Application</title>*@
+    <script>
+        var dojoConfig = {
+            async: true,
+            waitSeconds: 0,
+            packages: [
+                { name: 'dojo', location: '@Url.Content("~/Script/dojoSRC/dojo")' },
+                { name: 'dijit', location: '@Url.Content("~/Script/dojoSRC/dijit")' },
+                { name: 'themes', location: '@Url.Content("~/Script/dojoSRC/dijit-themes")' },
+            ]
+        }
+    </script>
+    <script src="~/Scripts/dojoSRC/dojo/dojo.js"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+@*</head>
+<body>*@
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
@@ -33,10 +45,14 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
-    </div>
-
+    </div>*@
+    <script>
+        require(["dijit/resgistry", "dojo/parser"], function (registry, parser) {
+            parser.parse();
+        })
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-</body>
+@*</body>
 </html>*@
