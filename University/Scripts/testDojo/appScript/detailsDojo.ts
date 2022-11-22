@@ -68,10 +68,31 @@ ready(new function () {
         return { FirstName: dom.byId("name-form").value, LastName: dom.byId("surname-form").value, NID: dom.byId("nid-form").value, GuardianName: dom.byId("guardian-form").value, Email: dom.byId("email-form").value, PhoneNumber: dom.byId("phone-form").value };
     }
     function isNameValid() {
-        console.log(validate.isText(dom.byId("name-form").value, { minlength: 1 })); 
+       return (validate.isText(dom.byId("name-form").value, { minlength: 1, maxlength: 50})); 
+    }
+    function isLastNameValid() {
+        return validate.isText(dom.byId("surname-form").value, { minlength: 1, maxlength: 50 });
+    }
+    function isNIDValid() {
+        return validate.isText(dom.byId("nid-form").value, { minlength: 14, maxlength: 14 });
+    }
+    function isPhoneNumberValid() {
+        return validate.isNumberFormat(dom.byId("phone-form").value, {length: 8})
+    }
+    function isGuardianNameValid() {
+        return validate.isText(dom.byId("guardian-form").value, { minlength: 1, maxlength: 100 });
+    }
+    function isEmailValid() {
+        return validate.isEmailAddress(dom.byId("email-form").value, {});
     }
     on(dom.byId("name-form"), "blur", function () {
         isNameValid();
+    })
+    on(dom.byId("surname-form"), "blur", function () {
+        isLastNameValid();
+    })
+    on(dom.byId("nid-form"), "blur", function () {
+        isNIDValid();
     })
     request.get("/Student/GetCurrentStudent", {
         handleAs: 'json',
