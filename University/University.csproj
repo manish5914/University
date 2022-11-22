@@ -12153,6 +12153,7 @@
     <Content Include="Scripts\Student\detail.js" />
     <Content Include="Scripts\Student\register.js" />
     <Content Include="Scripts\Stylus\gulpfile.js" />
+    <Content Include="Scripts\Stylus\styles\css\Login.css" />
     <Content Include="Scripts\testDojo\appScript\details.js" />
     <Content Include="Scripts\testDojo\appScript\detailsDojo.js" />
     <Content Include="Scripts\testDojo\tsconfig.json" />
@@ -12257,7 +12258,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Stylus\styles\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
